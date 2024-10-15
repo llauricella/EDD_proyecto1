@@ -5,16 +5,13 @@
 package EstructurasDeDatos;
 
 /**
- * 
  * @version 13/10/2024
  * @author Michelle García
  */
 
 public class Grafo {
     
-    private ListaParada paradas; // Lista de la primera parada de cada línea
-    private DFS DFS;
-    private BFS BFS;
+    private Lista paradas; // Lista de la primera parada de cada línea
     private int t;
 
     /**
@@ -22,24 +19,22 @@ public class Grafo {
      * @param paradas
      * @param t
      */
-    public Grafo(ListaParada paradas, int t) {
+    public Grafo(Lista paradas, int t) {
         this.paradas = paradas;
-        this.BFS = new BFS(paradas);
-        this.DFS = new DFS(paradas);
         this.t = t;
     }
     
     /**
      * @return the paradas
      */
-    public ListaParada getParadas() {
+    public Lista getParadas() {
         return paradas;
     }
 
     /**
      * @param paradas the paradas to set
      */
-    public void setParadas(ListaParada paradas) {
+    public void setParadas(Lista paradas) {
         this.paradas = paradas;
     }
 
@@ -59,7 +54,7 @@ public class Grafo {
     
     
     
-    public void agregar_linea (){
+    public void agregar_linea (Lista paradas){
     
     }
     
@@ -68,13 +63,21 @@ public class Grafo {
         return null;
     }
     
-    // Debe recibir cual es el nodo a buscar a través de la señal de un botón
-    public void busqueda_profundidad (NodoParada origen, NodoParada objetivo, int t){
-        this.DFS.busqueda_profundidad(origen, objetivo);
+    public Lista cobertura_profundidad (Nodo origen, Nodo objetivo, int t){
+        DFS dfs = new DFS(paradas);
+        Lista encontrados = dfs.buscar_adyacentes(origen, t, objetivo);
+        return encontrados;
     }
     
-    public void busqueda_amplitud (){
-        
+    public Lista cobertura_amplitud (Nodo origen, Nodo objetivo, int t){
+        BFS bfs = new BFS();
+        Lista encontrados = bfs.buscar_adyacentes(origen, t, objetivo);
+        return encontrados;
+    }
+    
+    public void seleccionar_paradas(){
+    
+    
     }
     
     public void cargar_API(){

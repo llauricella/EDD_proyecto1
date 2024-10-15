@@ -5,42 +5,93 @@
 package EstructurasDeDatos;
 
 /**
- *
- * @author miche_ysmoa6e
+ * @version 15/10/2024
+ * @author Michelle García
  */
 public class DFS {
-    private ListaParada no_visitados;
-    private ListaParada descubiertos;
-    private ListaParada visitados;
+    // Utiliza LIFO ---> last in, first out
+    // Clase pila
 
-    public DFS(ListaParada no_visitados) {
-        this.no_visitados = no_visitados;
-        this.descubiertos = new ListaParada();
-        this.visitados = new ListaParada();
+    private Nodo pCima;
+    private int size;
+    private int limite = 0;
+    private Lista encontrados;
+    
+    public DFS(Lista original) {
+        this.pCima = original.getpFirst();
+        this.size = 1;
     }
     
-    // Debe recibir cual es el nodo a buscar a través de la señal de un botón
-    public ListaParada busqueda_profundidad (NodoParada origen, NodoParada objetivo){
-        ListaParada encontrados = new ListaParada();
+    public void apilar(Parada info){
+        Nodo nuevo = new Nodo(info);
+        nuevo.setpNext(getpCima());
+        setpCima(nuevo);
+        setSize(this.getSize()+1); 
+    }
+    
+    public void desapilar(){
+        Nodo temp = getpCima();
+        setpCima(temp.getpNext());
+        setSize(this.getSize()-1);
+    }
+    
+    public boolean es_vacío(){
+        return getpCima() == null;
+    }
+
+    /**
+     * @return the pCima
+     */
+    public Nodo getpCima() {
+        return pCima;
+    }
+
+    /**
+     * @param pCima the pCima to set
+     */
+    public void setpCima(Nodo pCima) {
+        this.pCima = pCima;
+    }
+
+    /**
+     * @return the size
+     */
+    public int getSize() {
+        return size;
+    }
+
+    /**
+     * @param size the size to set
+     */
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    // Se le deben pasar el pCima del DFS como origen
+    public Lista buscar_adyacentes(Nodo origen, int t, Nodo objetivo){
         
-        if (!this.no_visitados.es_vacio()){
-            this.descubiertos.insertar_final(origen);
-            for (int i = origen.getInfo().getAdyacentes().getSize(); i >= 0; i--){
-                
-                NodoParada aux = origen.getInfo().getAdyacentes().getpFirst();
-                if (aux.getInfo().getName().equals(objetivo.getInfo().getName())){
-                    encontrados.insertar_final(aux);
-                }
-                busqueda_profundidad(aux, objetivo);
-            } 
+        if (origen != objetivo){
+            Nodo temp = this.getpCima();
+            if (!this.es_vacío()){
+                desapilar();
+                limite++;
+                buscar_adyacentes (temp, t, objetivo);
+            }
         }
         else {
-            System.out.println("La lista esta vacía");
+            for (int i = 0; i <= t; i++){
+                encontrados.insertar_final(origen.getpNext());
+                origen = origen.getpNext();
+            }
         }
-    
+        
+        if (limite != (limite-t)){
+                limite--;
+                encontrados.insertar_final(origen);
+            }
+        
         return encontrados;
     }
-    
     
     
 }
