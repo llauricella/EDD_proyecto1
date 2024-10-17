@@ -12,7 +12,7 @@ public class Parada {
     
     private String name;
     private boolean sucursal;
-    private Lista adyacentes;
+    private ListaParada adyacentes;
 
     public Parada(String name) {
         this.name = name;
@@ -37,14 +37,14 @@ public class Parada {
     /**
      * @return the adyacentes
      */
-    public Lista getAdyacentes() {
+    public ListaParada getAdyacentes() {
         return adyacentes;
     }
 
     /**
      * @param adyacentes the adyacentes to set
      */
-    public void setAdyacentes(Lista adyacentes) {
+    public void setAdyacentes(ListaParada adyacentes) {
         this.adyacentes = adyacentes;
     }
     
@@ -53,13 +53,6 @@ public class Parada {
      */
     public String getName() {
         return name;
-    }
-    
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
     }
     
     public void seleccionar_sucursal (){
@@ -71,7 +64,5 @@ public class Parada {
     }
 
     
-
-   
     
 }

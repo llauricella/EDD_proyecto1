@@ -101,9 +101,6 @@ public class ListaParada {
         }
     }
     
-    // Función para ver el contenido de la lista
-    public void leer (){
     
     
-    }
 }
