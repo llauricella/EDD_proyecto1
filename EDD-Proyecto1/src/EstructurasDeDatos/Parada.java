@@ -19,12 +19,12 @@ public class Parada {
         this.sucursal = false;
         this.adyacentes = null;
     }
-    
+
     /**
      * @return the sucursal
      */
     public boolean hasSucursal() {
-        return sucursal;
+        return isSucursal();
     }
 
     /**
@@ -47,31 +47,47 @@ public class Parada {
     public void setAdyacentes(Lista adyacentes) {
         this.adyacentes = adyacentes;
     }
-    
+
     /**
      * @return the name
      */
     public String getName() {
         return name;
     }
-    
+
     /**
      * @param name the name to set
      */
     public void setName(String name) {
         this.name = name;
     }
-    
-    public void seleccionar_sucursal (){
-        this.sucursal = true;
-    }
-    
-    public void quitar_sucursal (){
-        this.sucursal = false;
+
+    /**
+     * @return the sucursal
+     */
+    public boolean isSucursal() {
+        return sucursal;
     }
 
-    
+    /**
+     */
+    public void seleccionar_sucursal() {
+        this.setSucursal(true);
+    }
 
-   
-    
+    /**
+     */
+    public void quitar_sucursal() {
+        this.setSucursal(false);
+    }
+
+    /**
+     * @return
+     */
+    public String leer_info() {
+        String txt = "";
+        txt = txt + "\nNombre: " + getName();
+        return txt;
+    }
+
 }

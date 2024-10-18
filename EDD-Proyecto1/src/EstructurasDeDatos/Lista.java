@@ -9,11 +9,11 @@ package EstructurasDeDatos;
  * @author Michelle García
  */
 public class Lista {
-    
+
     private Nodo pFirst;
     private Nodo pLast;
     private int size;
-    
+
     /**
      * Constructor de la clase
      */
@@ -64,50 +64,95 @@ public class Lista {
     public void setSize(int size) {
         this.size = size;
     }
-    
-    
-    public boolean es_vacio(){
+
+    public boolean es_vacio() {
         return pFirst == null;
     }
-    
-    // Función para buscar una parada por su nombre
-    public Nodo buscar (String name){
+
+    // Función para encontrar una parada por su nombre
+    public boolean encontrar(String name) {
         Nodo aux = this.getpFirst();
-        while (aux != null){
-            if (aux.getInfo().getName().equals(name)){
-                break;
+        boolean found = false;
+
+        while (aux != null) {
+            if (aux.getInfo().getName().equals(name)) {
+                found = true;
+            } else {
+                aux = aux.getpNext();
             }
-            else {
+
+        }
+        return found;
+    }
+
+    // Función para buscar una parada por su nombre
+    public Nodo buscar(String name) {
+        Nodo aux = this.getpFirst();
+        while (aux != null) {
+            if (aux.getInfo().getName().equals(name)) {
+                break;
+            } else {
                 aux = aux.getpNext();
             }
         }
         return aux;
     }
-    
+
     // Función para insertar una parada al final
-    public void insertar_final (Nodo nodo){
-        if (!this.es_vacio()){
+    public void insertar_final(Nodo nodo) {
+        if (this.es_vacio()) {
             this.setpFirst(nodo);
-            nodo.setpNext(pLast);
-        }
-        else {
+            nodo.setpNext(null);
+            
+        } else {
             Nodo aux = this.getpFirst();
-            while (aux.getpNext() != null){
+            while (aux.getpNext() != null) {
                 aux = aux.getpNext();
             }
             aux.setpNext(nodo);
             nodo.setpNext(null);
         }
     }
-    
+
     // Función para ver el contenido de la lista
-    public void leer (){
-    
-    
+    public String leer() {
+        Nodo aux = getpFirst();
+        String txt = "";
+
+        while (aux != null) {
+            txt = txt + aux.getInfo().leer_info();
+            aux = aux.getpNext();
+        }
+
+        return txt;
+
     }
-    
+
     // Función para eliminar un elemento de la lista
-    public void eliminar (Nodo out){
+    public void eliminar(Nodo out) {
+
+        if (getpFirst() == out) {
+            setpFirst(getpFirst().getpNext());
+        } else {
+            Nodo aux = getpFirst();
+            while (aux != out) {
+                aux = aux.getpNext();
+            }
+            Nodo next = aux.getpNext();
+            aux.setpNext(next);
+            setSize(getSize() - 1);
+        }
+
+    }
+
+    // Funcion para vaciar la lista
+    public void vaciar() {
+        this.pFirst = this.pLast = null;
+        this.setSize(0);
+    }
+    /*
+    // Función para eliminar el ultimo elemento de la lista
+    public void eliminar_ultimo (){
     
         if (getpFirst() == out){
             setpFirst(getpFirst().getpNext());
@@ -117,17 +162,29 @@ public class Lista {
             while (aux != out){
                 aux = aux.getpNext();
             }
-            Nodo next = aux.getpNext().getpNext();
+            Nodo next = aux.getpNext();
             aux.setpNext(next);
             setSize(getSize()-1);
         }
     
     }
     
-    // Funcion para vaciar la lista
-    public void vaciar (){
-        this.pFirst = this.pLast = null;
-        this.setSize(0);
-    }
+    // Función para eliminar un elemento de la lista
+    public void eliminar_primero (Nodo out){
     
+        if (getpFirst() == out){
+            setpFirst(getpFirst().getpNext());
+        }
+        else {
+            Nodo aux = getpFirst();
+            while (aux != out){
+                aux = aux.getpNext();
+            }
+            Nodo next = aux.getpNext();
+            aux.setpNext(next);
+            setSize(getSize()-1);
+        }
+    
+    }
+     */
 }

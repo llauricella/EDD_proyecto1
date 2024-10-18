@@ -7,12 +7,12 @@ package EstructurasDeDatos;
 /**
  * @version 13/10/2024
  * @author Michelle García
+ * 
  */
 public class Nodo {
     
     private Nodo pNext;
     private Parada info;
-    private boolean visitado;
 
     /**
      * Constructor de la clase Nodo
@@ -21,13 +21,11 @@ public class Nodo {
     public Nodo(Parada info) {
         this.pNext = null;
         this.info = info;
-        this.visitado = false;
     }
     
     public Nodo() {
         this.pNext = null;
         this.info = null;
-        this.visitado = false;
     }
 
     /**
@@ -58,18 +56,6 @@ public class Nodo {
         this.info = info;
     }
 
-    /**
-     * @return the visitado
-     */
-    public boolean isVisitado() {
-        return visitado;
-    }
-
-    /**
-     * @param visitado the visitado to set
-     */
-    public void setVisitado(boolean visitado) {
-        this.visitado = visitado;
-    }
+    
     
 }
