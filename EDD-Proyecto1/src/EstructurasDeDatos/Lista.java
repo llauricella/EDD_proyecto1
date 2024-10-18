@@ -138,6 +138,7 @@ public class Lista {
             while (aux != out) {
                 aux = aux.getpNext();
             }
+            
             Nodo next = aux.getpNext();
             aux.setpNext(next);
             setSize(getSize() - 1);

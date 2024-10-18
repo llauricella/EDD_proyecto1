@@ -99,7 +99,7 @@ public class DFS {
      */
     public void setLimite(int limite) {
         this.limite = limite;
-    } 
+    }
 
     /**
      * @param origen

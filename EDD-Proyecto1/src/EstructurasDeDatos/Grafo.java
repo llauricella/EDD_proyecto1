@@ -53,9 +53,6 @@ public class Grafo {
     public String cobertura_total() {
         String txt = "";
         
-        // Testing 
-        
-        /*
         Nodo first = this.getParadas().getpFirst();
         DFS dfs = new DFS(getParadas());
         Lista pendientes = dfs.obtener_cobertura(first);
@@ -67,21 +64,16 @@ public class Grafo {
             txt = txt + "Sucursales recomendadas para lograr la cobertura total: \n"
                     + pendientes.leer();
         }
-        */
-        
-        /*
-        Nodo first = this.getParadas().getpFirst();
+        Nodo inicio = this.getParadas().getpFirst();
         BFS bfs = new BFS ();
-        Lista pendientes = bfs.obtener_cobertura(first);
+        Lista obtener = bfs.obtener_cobertura(inicio);
 
         if (pendientes == null) {
             txt = "Las sucursales cubren toda la ciudad";
         } else {
             txt = txt + "Sucursales recomendadas para lograr la cobertura total: \n"
-                    + pendientes.leer();
+                    + obtener.leer();
         }
-        */
-        
         return txt;
     }
 
