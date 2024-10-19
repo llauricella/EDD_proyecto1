@@ -13,28 +13,27 @@ public class DFS {
 
     /**
      */
-    private Nodo pCima;
-    private int size;
+    private Lista pila;
     private int limite = 0;
     private Lista encontrados;
+    private Lista visitados;
 
     /**
-     * @param original
      */
-    public DFS(Lista original) {
-        this.pCima = original.getpFirst();
-        this.size = 1;
+    public DFS() {
+        this.pila = new Lista();
         this.encontrados = new Lista();
+        this.visitados = new Lista();
     }
 
     /**
-     * @param info
+     * @param nuevo
      */
-    public void apilar(Parada info) {
-        Nodo nuevo = new Nodo(info);
+    public void apilar(Nodo nuevo) {
+
         nuevo.setpNext(getpCima());
         setpCima(nuevo);
-        setSize(this.getSize() + 1);
+        getPila().setSize(getPila().getSize() + 1);
     }
 
     /**
@@ -42,7 +41,7 @@ public class DFS {
     public void desapilar() {
         Nodo temp = getpCima();
         setpCima(temp.getpNext());
-        setSize(this.getSize() - 1);
+        getPila().setSize(getPila().getSize() - 1);
     }
 
     /**
@@ -56,28 +55,14 @@ public class DFS {
      * @return the pCima
      */
     public Nodo getpCima() {
-        return pCima;
+        return getPila().getpFirst();
     }
 
     /**
      * @param pCima the pCima to set
      */
     public void setpCima(Nodo pCima) {
-        this.pCima = pCima;
-    }
-
-    /**
-     * @return the size
-     */
-    public int getSize() {
-        return size;
-    }
-
-    /**
-     * @param size the size to set
-     */
-    public void setSize(int size) {
-        this.size = size;
+        this.getPila().setpFirst(pCima);
     }
 
     /**
@@ -102,25 +87,72 @@ public class DFS {
     }
 
     /**
+     * @return the visitados
+     */
+    public Lista getVisitados() {
+        return visitados;
+    }
+
+    /**
+     * @param visitados the visitados to set
+     */
+    public void setVisitados(Lista visitados) {
+        this.visitados = visitados;
+    }
+
+    /**
+     * @return the pila
+     */
+    public Lista getPila() {
+        return pila;
+    }
+
+    /**
+     * @param pila the pila to set
+     */
+    public void setPila(Lista pila) {
+        this.pila = pila;
+    }
+
+    /**
      * @param origen
      * @param t
      * @param objetivo
      * @return
      */
     public Lista buscar_adyacentes(Nodo origen, int t, Nodo objetivo) {
+        //System.out.println("ejecutado");
 
-        if (!origen.getInfo().getName().equals(objetivo.getInfo().getName())) {
+        setpCima(origen);
+        if (!getpCima().getInfo().getName().equals(objetivo.getInfo().getName())) {
             Nodo temp = getpCima();
-            if (getpCima() != null) {
-                desapilar();
+            desapilar();
+            getVisitados().insertar_final(temp);
+
+            if (!temp.getInfo().getAdyacentes().es_vacio()) {
+                for (Nodo i = temp.getInfo().getAdyacentes().getpFirst(); i != null; i = i.getpNext()) {
+                    apilar(i);
+                }
+            }
+
+            temp = getpCima();
+            if (temp != null) {
                 setLimite(getLimite() + 1);
                 buscar_adyacentes(temp, t, objetivo);
             }
+
         } else {
             for (int i = 1; i <= t; i++) {
-                if (origen.getpNext() != null) {
-                    getEncontrados().insertar_final(origen.getpNext());
-                    origen = origen.getpNext();
+                if (origen != null) {
+                    if (origen.getpNext() != null) {
+                        origen = origen.getpNext();
+                    } else {
+                        origen = origen.getInfo().getAdyacentes().getpFirst();
+                    }
+                    
+                    if (origen != null) {
+                        getEncontrados().insertar_final(origen);
+                    }
                 }
             }
         }
@@ -128,7 +160,9 @@ public class DFS {
         int count = getLimite();
         if (count != (getLimite() - t)) {
             count--;
-            getEncontrados().insertar_final(origen);
+            if (origen != null) {
+                getEncontrados().insertar_final(origen);
+            }
         }
 
         return getEncontrados();

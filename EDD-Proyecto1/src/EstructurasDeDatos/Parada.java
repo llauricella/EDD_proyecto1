@@ -17,7 +17,7 @@ public class Parada {
     public Parada(String name) {
         this.name = name;
         this.sucursal = false;
-        this.adyacentes = null;
+        this.adyacentes = new Lista();
     }
 
    

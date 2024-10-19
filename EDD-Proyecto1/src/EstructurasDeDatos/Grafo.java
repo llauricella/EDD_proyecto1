@@ -54,7 +54,7 @@ public class Grafo {
         String txt = "";
         
         Nodo first = this.getParadas().getpFirst();
-        DFS dfs = new DFS(getParadas());
+        DFS dfs = new DFS();
         Lista pendientes = dfs.obtener_cobertura(first);
         
 
@@ -88,7 +88,7 @@ public class Grafo {
      * indicado
      */
     public Lista cobertura_profundidad(Nodo origen, Nodo objetivo, int t) {
-        DFS dfs = new DFS(getParadas());
+        DFS dfs = new DFS();
         Lista encontrados = dfs.buscar_adyacentes(origen, t, objetivo);
         return encontrados;
     }

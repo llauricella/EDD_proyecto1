@@ -73,14 +73,13 @@ public class Lista {
     public boolean encontrar(String name) {
         Nodo aux = this.getpFirst();
         boolean found = false;
-
         while (aux != null) {
             if (aux.getInfo().getName().equals(name)) {
                 found = true;
+                break;
             } else {
                 aux = aux.getpNext();
             }
-
         }
         return found;
     }
@@ -100,10 +99,10 @@ public class Lista {
 
     // Función para insertar una parada al final
     public void insertar_final(Nodo nodo) {
+        
         if (this.es_vacio()) {
             this.setpFirst(nodo);
             nodo.setpNext(null);
-            
         } else {
             Nodo aux = this.getpFirst();
             while (aux.getpNext() != null) {

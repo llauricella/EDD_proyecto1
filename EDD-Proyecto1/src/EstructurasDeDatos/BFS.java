@@ -89,13 +89,12 @@ public class BFS {
      */
     public void encolar(Nodo nuevo) {
         nuevo.setpNext(null);
-
         if (getCola().getpFirst() == null) {
             getCola().setpFirst(nuevo);
+            getCola().setpLast(nuevo);
         } else {
             getCola().getpLast().setpNext(nuevo);
         }
-        getCola().setpLast(nuevo);
         getCola().setSize(getCola().getSize() + 1);
     }
 
@@ -103,12 +102,15 @@ public class BFS {
      *
      */
     public void desencolar() {
-        Nodo temp = getCola().getpFirst();
-        getCola().setpFirst(temp.getpNext());
-        getCola().setSize(getCola().getSize() - 1);
 
-        if (getCola().getpFirst() == null) {
-            getCola().setpLast(null);
+        if (!getCola().es_vacio()) {
+            Nodo temp = getCola().getpFirst();
+            getCola().setpFirst(temp.getpNext());
+            getCola().setSize(getCola().getSize() - 1);
+
+            if (getCola().getpFirst() == null) {
+                getCola().setpLast(null);
+            }
         }
     }
 
@@ -127,40 +129,53 @@ public class BFS {
      * @return
      */
     public Lista buscar_adyacentes(Nodo origen, int t, Nodo objetivo) {
-        
-        encolar(origen);
-        if (!getCola().es_vacio()) {
-            if (origen.getInfo().getName().equals(objetivo.getInfo().getName())) {
-                for (int i = 1; i <= t; i++) {
-                    if (origen.getpNext() != null) {
-                        getEncontrados().insertar_final(origen.getpNext());
-                        origen = origen.getpNext();
-                    }
-                }
-            } else {
-                setLimite(getLimite() + 1);
-                if (!getVisitados().encontrar(origen.getInfo().getName())) {
-                    if (origen.getpNext() != null) {
-                        origen = origen.getpNext();
-                    } else {
-                        origen = origen.getInfo().getAdyacentes().getpFirst();
-                    }
 
-                    if (origen != null) {
-                        buscar_adyacentes(origen, t, objetivo);
-                        getVisitados().insertar_final(origen);
-                        getCola().eliminar(origen);
-                    }
-                }
-            }
+        if (getCola().encontrar(origen.getInfo().getName()) == false) {
+            encolar(origen);
+            getVisitados().insertar_final(origen);
         }
 
-        int count = getLimite();
-        if (count != (getLimite() - t)) {
-            if (origen != null) {
-                getEncontrados().insertar_final(origen);
+        if (origen != null) {
+            if (!getCola().es_vacio()) {
+                Nodo actual = getCola().getpFirst();
+                desencolar();
+
+                if (actual.getInfo().getName().equals(objetivo.getInfo().getName())) {
+                    for (int i = 1; i <= t; i++) {
+                        if (actual.getpNext() != null) {
+                            actual = actual.getpNext();
+                        } else {
+                            if (!actual.getInfo().getAdyacentes().es_vacio()){
+                                actual = actual.getInfo().getAdyacentes().getpFirst();
+                            }
+                        }
+
+                        getEncontrados().insertar_final(actual);
+
+                    }
+                } else {
+                    setLimite(getLimite() + 1);
+                    if (!actual.getInfo().getAdyacentes().es_vacio()) {
+                        for (Nodo i = actual.getInfo().getAdyacentes().getpFirst(); i != null; i = i.getpNext()) {
+                            if (getVisitados().encontrar(i.getInfo().getName()) == false) {
+                                getVisitados().insertar_final(i);
+                                encolar(i);
+                            }
+                        }
+
+                        actual = getCola().getpFirst();
+                        if (!getCola().es_vacio()) {
+                            buscar_adyacentes(actual, t, objetivo);
+                        }
+                    }
+                }
+
+                int count = getLimite();
+                if (count != (getLimite() - t)) {
+                    getEncontrados().insertar_final(origen);
+                    count--;
+                }
             }
-            count--;
         }
 
         return getEncontrados();
@@ -186,7 +201,7 @@ public class BFS {
             } else {
                 first = first.getpNext();
             }
- 
+
             if (first != null) {
                 obtener_cobertura(first);
                 getVisitados().insertar_final(first);
