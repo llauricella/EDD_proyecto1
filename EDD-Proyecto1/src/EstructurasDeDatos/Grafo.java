@@ -5,134 +5,109 @@
 package EstructurasDeDatos;
 
 /**
- * 
- * @version 13/10/2024
+ * Esta clase define un objeto grafo que contenga una lista de paradas y un
+ * entero para indicar el rango de búsqueda actual
+ *
  * @author Michelle García
+ * @version 13/10/2024
  */
-
 public class Grafo {
-    
-    private ListaParada paradas; // Lista de la primera parada de cada línea
-    private ListaParada DFS;
-    private ListaParada BFS;
-    private int t;
+
+    private Lista paradas;
 
     /**
      * Constructor de la clase grafo
-     * @param paradas
-     * @param t
+     *
+     * @param paradas Define la lista de paradas correspondientes al grafo
      */
-    public Grafo(ListaParada paradas, int t) {
+    public Grafo(Lista paradas) {
         this.paradas = paradas;
-        this.BFS = null;
-        this.DFS = null;
-        this.t = t;
     }
-    
+
     /**
-     * @return the paradas
+     * Método que devuelve la lista que contiene las paradas del grafo
+     *
+     * @return Lista actual de paradas
      */
-    public ListaParada getParadas() {
+    public Lista getParadas() {
         return paradas;
     }
 
     /**
-     * @param paradas the paradas to set
+     * Procedimiento que introduce una lista de paradas dentro del grafo dada
+     * una lista nueva
+     *
+     * @param paradas Nueva lista de paradas
      */
-    public void setParadas(ListaParada paradas) {
+    public void setParadas(Lista paradas) {
         this.paradas = paradas;
     }
 
     /**
-     * @return the BFS
+     * Método para encontrar si las sucursales actuales del grafo cubren toda
+     * una ciudad
+     *
+     * @return Un string donde se encuentre la información acorde a los
+     * resultados
      */
-    public ListaParada getBFS() {
-        return BFS;
-    }
-
-    /**
-     * @param BFS the BFS to set
-     */
-    public void setBFS(ListaParada BFS) {
-        this.BFS = BFS;
-    }
-
-    /**
-     * @return the DFS
-     */
-    public ListaParada getDFS() {
-        return DFS;
-    }
-
-    /**
-     * @param DFS the DFS to set
-     */
-    public void setDFS(ListaParada DFS) {
-        this.DFS = DFS;
-    }
-    
-    /**
-     * @return the t
-     */
-    public int getT() {
-        return t;
-    }
-
-    /**
-     * @param t the t to set
-     */
-    public void setT(int t) {
-        this.t = t;
-    }
-    
-    
-    
-    public void agregar_linea (){
-    
-    }
-    
-    public String cobertura_total (){
-    
-        return null;
-    }
-    
-    // Debe recibir cual es el nodo a buscar a través de la señal de un botón
-    public void busqueda_profundidad (NodoParada origen, NodoParada objetivo, int t, ListaParada no_visitados){
+    public String cobertura_total() {
+        String txt = "";
         
-        ListaParada encontrados = new ListaParada();
+        Nodo first = this.getParadas().getpFirst();
+        DFS dfs = new DFS(getParadas());
+        Lista pendientes = dfs.obtener_cobertura(first);
         
-        if (!no_visitados.es_vacio()){
-            NodoParada aux = no_visitados.getpFirst();
-            
-            while (origen != objetivo){
-                if (aux.getpNext() != null){
-                    if (aux == no_visitados.buscar_parada(objetivo.getInfo().getName())){
-                        encontrados.insertar_final(aux);
-                    }
-                    busqueda_profundidad(aux, objetivo, t, aux.getInfo().getAdyacentes());
-                }
-            }
-            
-            origen.getpNext();
-        
+
+        if (pendientes == null) {
+            txt = "Las sucursales cubren toda la ciudad";
+        } else {
+            txt = txt + "Sucursales recomendadas para lograr la cobertura total: \n"
+                    + pendientes.leer();
         }
-        else {
-            System.out.println("La lista esta vacía");
+        Nodo inicio = this.getParadas().getpFirst();
+        BFS bfs = new BFS ();
+        Lista obtener = bfs.obtener_cobertura(inicio);
+
+        if (pendientes == null) {
+            txt = "Las sucursales cubren toda la ciudad";
+        } else {
+            txt = txt + "Sucursales recomendadas para lograr la cobertura total: \n"
+                    + obtener.leer();
         }
-    
-    }
-    
-    public void busqueda_amplitud (){
-        
-    }
-    
-    public void cargar_API(){
-    
-    }
-    
-    public void guardar_API(){
-    
+        return txt;
     }
 
-    
+    /**
+     * Método que devuelve una lista de las paradas más cercanas a una parada
+     * específica según DFS
+     *
+     * @param origen Nodo desde el cual se empezará la búsqueda
+     * @param objetivo Nodo a encontrar
+     * @param t Rango de búsqueda
+     * @return Lista que contenga las paradas más cercanas dentro del rango
+     * indicado
+     */
+    public Lista cobertura_profundidad(Nodo origen, Nodo objetivo, int t) {
+        DFS dfs = new DFS(getParadas());
+        Lista encontrados = dfs.buscar_adyacentes(origen, t, objetivo);
+        return encontrados;
+    }
+
+    /**
+     * Método que devuelve una lista de las paradas más cercanas a una parada
+     * específica según BFS
+     *
+     * @param origen Nodo desde el cual se empezará la búsqueda
+     * @param objetivo Nodo a encontrar
+     * @param t Rango de búsqueda
+     * @return Lista que contenga las paradas más cercanas dentro del rango
+     * indicado
+     */
+    public Lista cobertura_amplitud(Nodo origen, Nodo objetivo, int t) {
+        BFS bfs = new BFS();
+        Lista encontrados = bfs.buscar_adyacentes(origen, t, objetivo);
+        return encontrados;
+    }
+
+
 }
