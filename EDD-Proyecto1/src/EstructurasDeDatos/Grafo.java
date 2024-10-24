@@ -17,7 +17,9 @@ public class Grafo {
      * Esta clase define un objeto de tipo grafo. Contiene una lista de todos los nodos existentes.
      */
     private Lista nodos;
-
+    private int t;
+    
+    
     /***
      * Constructor de la clase Grafo. Inicializa la lista de nodos en vacío.
      */
@@ -93,4 +95,19 @@ public class Grafo {
         }
     }
 
+    /**
+     * @return the t
+     */
+    public int getT() {
+        return t;
+    }
+
+    /**
+     * @param t the t to set
+     */
+    public void setT(int t) {
+        this.t = t;
+    }
+
+    
 }

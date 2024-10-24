@@ -18,7 +18,8 @@ public class Nodo {
     public Lista children;
     public Parada info;
     public Nodo parent;
-
+    
+   
     /***
      * Constructor de la clase Nodo
      * 
@@ -28,5 +29,7 @@ public class Nodo {
         this.info = info;
         this.children = new Lista();
     }
+    
+    
 
 }

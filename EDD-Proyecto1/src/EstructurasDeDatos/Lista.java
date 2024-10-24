@@ -146,19 +146,32 @@ public class Lista {
         }
     }
     
-    public void findElement(Object root, Object element){
+    public boolean contains(Object value){
         
-        boolean found = false;
-        
-        do {
-            if (root == element){
-                found = true;
-            } else {
-            
-            }
-        
-        
-        } while (found != true);
-    
+        if (this.value != null && this.value.value.equals(value)){
+            return true;
+        } else if (this.next != null){
+            return this.next.contains(value);
+        } else {
+            return false;
+        }
     }
+    
+    public int indexOf(Object value){
+        String aux = ((Nodo)this.value.value).info.getName();
+        
+        if (this.value != null && aux.equals(((Nodo)value).info.getName())){
+            return this.value.index;
+        } else {
+            if (this.next != null){
+                return this.next.indexOf(value);
+            }
+            else {
+                return -1;
+            }
+        }
+    }
+    
+    
+    
 }
