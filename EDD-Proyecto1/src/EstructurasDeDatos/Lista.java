@@ -49,7 +49,7 @@ public class Lista {
      * @param index Índice del elemento a retornar
      * @return Elemento encontrado según su índice
      */
-    public Object Get(int index) {
+    public Object get(int index) {
         if (index == 0) {
             if (this.value != null) {
                 return this.value.value;
@@ -58,7 +58,7 @@ public class Lista {
             }
         } else {
             index--;
-            return this.next.Get(index);
+            return this.next.get(index);
         }
     }
 
@@ -142,7 +142,23 @@ public class Lista {
      */
     public void printList() {
         for (int i = 0; i < Count(); i++) {
-            System.out.println(Get(i));
+            System.out.println(get(i));
         }
+    }
+    
+    public void findElement(Object root, Object element){
+        
+        boolean found = false;
+        
+        do {
+            if (root == element){
+                found = true;
+            } else {
+            
+            }
+        
+        
+        } while (found != true);
+    
     }
 }

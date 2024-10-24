@@ -21,7 +21,7 @@ public class Cola {
      * @param j Objeto a encolar
      */
     public void enqueue(Object j) {
-        queue.Add(j);
+        getQueue().Add(j);
     }
 
     
@@ -31,9 +31,9 @@ public class Cola {
      * @return Primer elemento de la cola
      */
     public Object dequeue() {
-        if (queue.Count() > 0) {
-            Object value = queue.Get(0);
-            queue.Remove(0);
+        if (getQueue().Count() > 0) {
+            Object value = getQueue().get(0);
+            getQueue().Remove(0);
             return value;
         }
         return null;
@@ -45,7 +45,7 @@ public class Cola {
      * @return Cantidad de elementos encolados en la cola actual
      */
     public int getCount() {
-        return queue.Count();
+        return getQueue().Count();
     }
 
     /**
@@ -55,7 +55,7 @@ public class Cola {
      * @return Objeto según la posición
      */
     public Object get(int index) {
-        return queue.Get(index);
+        return getQueue().get(index);
     }
     
     /**
@@ -63,8 +63,17 @@ public class Cola {
      */
     public void printQueue() {
         for (int i = 0; i < getCount(); i++) {
-            System.out.println(queue.Get(i));
+            System.out.println(getQueue().get(i));
         }
     }
+
+    /**
+     * @return the queue
+     */
+    public Lista getQueue() {
+        return queue;
+    }
+    
+    
 
 }

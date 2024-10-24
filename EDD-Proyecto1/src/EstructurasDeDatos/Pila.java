@@ -31,7 +31,7 @@ public class Pila {
      */
     public Object Pop() {
         if (stack.Count() > 0) {
-            Object value = stack.Get(stack.Count() - 1);
+            Object value = stack.get(stack.Count() - 1);
             stack.Remove(stack.Count() - 1);
             return value;
         }
@@ -54,7 +54,7 @@ public class Pila {
      * @return Elemento de la pila según el índice indicado.
      */
     public Object Get(int index) {
-        return stack.Get(index);
+        return stack.get(index);
     }
 
     /**
@@ -84,7 +84,7 @@ public class Pila {
     public int GetStackPosition(Object element) {
         int c = stack.Count();
         for (int i = 0; i < c; i++) {
-            Object elem = stack.Get(i);
+            Object elem = stack.get(i);
 
             if (elem.equals(element)) {
                 return i;
@@ -105,7 +105,7 @@ public class Pila {
      */
     public void printStack() {
         for (int i = 0; i < getCount(); i++) {
-            System.out.println(stack.Get(i));
+            System.out.println(stack.get(i));
         }
     }
 }
