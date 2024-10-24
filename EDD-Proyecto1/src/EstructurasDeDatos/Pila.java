@@ -5,11 +5,11 @@
 package EstructurasDeDatos;
 
 /**
- * @version 13/10/2024
+ *
+ * @version 15/10/2024
  * @author Michelle García
- * 
  */
-public class Nodo {
-    
+public class Pila {
+
 
 }
