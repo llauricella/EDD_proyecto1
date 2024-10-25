@@ -5,22 +5,24 @@
 package EstructurasDeDatos;
 
 /**
+ * Esta clase define un objeto de tipo Parada. Contiene el nombre de la parada y
+ * un booleano que indica si tiene o no tiene una sucursal dentro de su rango.
+ *
  * @version 13/10/2024
  * @author Michelle García
  */
 public class Parada {
-    /***
-     * Esta clase define un objeto de tipo Parada. Contiene el nombre de la parada y un booleano que indica si tiene o no tiene
-     * una sucursal dentro de su rango.
-     */
+
     private String name;
     private boolean sucursal;
 
-    /***
+    /**
+     * *
      * Constructor de la clase Parada.
-     * 
+     *
      * @param name Nombre de la Parada
-     * @param sucursal Booleano que indique si tiene una sucursal dentro de su rango.
+     * @param sucursal Booleano que indique si tiene una sucursal dentro de su
+     * rango.
      */
     public Parada(String name, boolean sucursal) {
         this.name = name;
@@ -29,7 +31,7 @@ public class Parada {
 
     /**
      * Procedimiento que cambia el valor del booleano sucursal.
-     * 
+     *
      * @param sucursal Booleano true o false.
      */
     public void setSucursal(boolean sucursal) {
@@ -38,7 +40,7 @@ public class Parada {
 
     /**
      * Función que retorna el valor del atributo sucursal.
-     * 
+     *
      * @return Booleano true o false.
      */
     public boolean isSucursal() {
@@ -47,7 +49,7 @@ public class Parada {
 
     /**
      * Función que retorna el valor del atributo nombre.
-     * 
+     *
      * @return Nombre de la parada.
      */
     public String getName() {
@@ -56,7 +58,7 @@ public class Parada {
 
     /**
      * Procedimiento que cambia el nombre de la parada.
-     * 
+     *
      * @param name Nombre nuevo
      */
     public void setName(String name) {
@@ -72,11 +74,12 @@ public class Parada {
 
     /**
      * Función que imprime el contenido de la parada
+     *
      * @return String con la información del objeto parada
      */
     public String leerInfo() {
         String txt = "";
-        txt = txt + "\nNombre: " + getName() + "Sucursal: "+ isSucursal();
+        txt = txt + "\nNombre: " + getName() + "Sucursal: " + isSucursal();
         return txt;
     }
 

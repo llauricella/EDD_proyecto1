@@ -5,237 +5,194 @@
 package EstructurasDeDatos;
 
 /**
+ * En esta clase se almacenan todos lo métodos de busca a ejecutar.
+ *
  * @version 24/10/2024
  * @author Michelle García
  */
 public class Busquedas {
 
+    /**
+     * Función de búsqueda por amplitud, utilizando un límite determinado.
+     *
+     * @param root Nodo donde se iniciará la búsqueda
+     * @param heightLimit Altura máxima que podrá alcanzar la búsqueda.
+     * @return Una lista que contenga a todos los nodos que se lograron visitar
+     * dentro del rango de búsqueda.
+     */
     public static Lista BFS(Nodo root, int heightLimit) {
-        // Busqueda en anchura de padre a hijos
-        Lista result1 = new Lista();
+        // Breadth-First Search from parent to children
+        return getAllNodesByHeight(visitAllNodesBFS(root), heightLimit);
+    }
 
-        if (root == null) {
-            return result1;
-        }
+    /**
+     * Función de búsqueda por profundidad utilizando un límite determinado.
+     *
+     * @param root Nodo donde se iniciará la búsqueda
+     * @param heightLimit Altura máxima que podrá alcanzar la búsqueda.
+     * @return Una lista que contenga a todos los nodos que se lograron visitar
+     * dentro del rango de búsqueda.
+     */
+    public static Lista DFS(Nodo root, int heightLimit) {
+        // Depth-First Search from parent to children
+        return getAllNodesByHeight(visitAllNodesDFS(root), heightLimit);
+    }
 
+    /**
+     * *
+     *
+     *
+     * @param root
+     * @param heightLimit
+     * @return
+     */
+    public static Lista BFSSucursal(Nodo root, int heightLimit) {
+        // Depth-First Search from parent to children
+        return getAllNodesByHeight(visitAllNodesBFSSucursal(root), heightLimit);
+    }
+
+    /**
+     * Función que visita todos los nodos dentro del grafo utilizando la
+     * búsqueda por amplitud.
+     *
+     * @param root Nodo donde se iniciará el recorrido.
+     * @return Una lista con todos los nodos visitados.
+     */
+    private static Lista visitAllNodesBFS(Nodo root) {
+        Lista visitedNodes = new Lista();
+        Lista visited = new Lista();
         Cola queue = new Cola();
+
         queue.enqueue(root);
-        int currentHeight = 0;
+        root.setHeight(0);
 
-        while (queue.getCount() > 0 && currentHeight <= heightLimit) {
-            int levelSize = queue.getCount();
-            for (int i = 0; i < levelSize; i++) {
-                Nodo currentNode = (Nodo) queue.dequeue();
-                result1.Add(currentNode);
+        while (queue.getCount() > 0) {
+            Nodo currentNode = (Nodo) queue.dequeue();
 
-                if (currentNode != null && currentNode.children != null) {
-                    for (int x = 0; x < currentNode.children.Count(); x++) {
-                        Nodo child = (Nodo) currentNode.children.get(x);
-                        queue.enqueue(child);
+            if (currentNode == null) {
+                break;
+            }
+
+            if (!visited.contains(currentNode)) {
+                visited.add(currentNode);
+                visitedNodes.add(currentNode);
+
+                if (currentNode.getChildren() != null) {
+                    for (int i = 0; i < currentNode.getChildren().count(); i++) {
+                        Nodo child = (Nodo) currentNode.getChildren().get(i);
+                        if (child != null && !visited.contains(child)) {
+                            queue.enqueue(child);
+                            child.setHeight(currentNode.getHeight() + 1);
+                        }
                     }
                 }
             }
-            currentHeight++;
         }
+        return visitedNodes;
+    }
 
-        result1.Remove(0);
+    /**
+     * Función que visita todos los nodos dentro del grafo utilizando la
+     * búsqueda por amplitud. Su finalidad es encontrar todos los nodos que
+     * no posean una sucursal.
+     *
+     * @param root Nodo donde se iniciará el recorrido.
+     * @return Una lista con todos los nodos visitados sin sucursal.
+     */
+    private static Lista visitAllNodesBFSSucursal(Nodo root) {
+        Lista visitedNodes = new Lista();
+        Lista visited = new Lista();
+        Cola queue = new Cola();
 
-        // Busqueda en anchura de hijos a padre
-        Lista result2 = new Lista();
-        Cola queue2 = new Cola();
-        queue2.enqueue(root);
-        currentHeight = 0;
+        queue.enqueue(root);
+        root.setHeight(0);
 
-        while (queue2.getCount() > 0 && currentHeight <= heightLimit) {
-            int levelSize = queue2.getCount();
+        while (queue.getCount() > 0) {
+            Nodo currentNode = (Nodo) queue.dequeue();
 
-            for (int i = 0; i < levelSize; i++) {
-                Nodo currentNode = (Nodo) queue2.dequeue();
-                result2.Add(currentNode);
+            if (currentNode == null) {
+                break;
+            }
+            if (currentNode.getInfo().isSucursal() == false) {
+                if (!visited.contains(currentNode)) {
+                    visited.add(currentNode);
+                    visitedNodes.add(currentNode);
 
-                if (currentNode != null && currentNode.parent != null) {
-                    queue2.enqueue(currentNode.parent);
+                    if (currentNode.getChildren() != null) {
+                        for (int i = 0; i < currentNode.getChildren().count(); i++) {
+                            Nodo child = (Nodo) currentNode.getChildren().get(i);
+                            if (child != null && !visited.contains(child)) {
+                                queue.enqueue(child);
+                                child.setHeight(currentNode.getHeight() + 1);
+                            }
+                        }
+                    }
                 }
             }
-            currentHeight++;
         }
-
-        if (result2.Count() > 0) {
-            result2.Remove(0);
-            result1.AddRange(result2);
-        }
-
-        return result1;
+        return visitedNodes;
     }
 
-     public Lista BFSExtendido(Nodo input, int heightLimit){
-    
-        Nodo root = input;
-        Lista bfsRamaIzquierda = BFS(root, heightLimit);
-        Nodo parent = null;
-        
-        do {
-            if (root.parent != null){
-                parent = root.parent;
-                root = parent;
-            } else {
-                break;
-            }
-        
-        } while (parent != null);
-        
-        if (parent != null){
-            Lista bfsRamaDerecha = DFS(parent,(heightLimit)-1);
-            bfsRamaIzquierda.AddRange(bfsRamaDerecha);
-            int i = bfsRamaIzquierda.indexOf(input);
-            bfsRamaIzquierda.Remove(i);
-        }
-        return bfsRamaIzquierda;
-    }
-    
     /**
-     * Implementa la busqueda en profundidad
+     * Función que visita todos los nodos dentro del grafo utilizando la
+     * búsqueda por profundidad.
      *
-     * @param root
-     * @param heightLimit
-     * @return
+     * @param root Nodo donde se iniciará el recorrido.
+     * @return Una lista con todos los nodos visitados.
      */
-    public static Lista DFS(Nodo root, int heightLimit) {
-        Lista result1 = new Lista();
+    private static Lista visitAllNodesDFS(Nodo root) {
+        Lista visitedNodes = new Lista();
+        Lista visited = new Lista();
+        Pila stack = new Pila();
 
-        // Busqueda en anchura de padres a hijo
-        if (root == null) {
-            return result1;
-        }
+        stack.push(root);
+        root.setHeight(0);
 
-        Pila stack1 = new Pila();
-        stack1.Push(root);
-
-        while (stack1.getCount() > 0) {
-            Nodo currentNode = (Nodo) stack1.Pop();
-            int currentHeight = stack1.getCount();
-
-            if (currentHeight > heightLimit) {
-                continue;
-            }
+        while (stack.getCount() > 0) {
+            Nodo currentNode = (Nodo) stack.pop();
 
             if (currentNode == null) {
                 break;
             }
 
-            result1.Add(currentNode);
+            if (!visited.contains(currentNode)) {
+                visited.add(currentNode);
+                visitedNodes.add(currentNode);
 
-            for (int i = currentNode.children.Count() - 1; i >= 0; i--) {
-                stack1.Push(currentNode.children.get(i));
+                if (currentNode.getChildren() != null) {
+                    for (int i = 0; i < currentNode.getChildren().count(); i++) {
+                        Nodo child = (Nodo) currentNode.getChildren().get(i);
+                        if (child != null && !visited.contains(child)) {
+                            stack.push(child);
+                            child.setHeight(currentNode.getHeight() + 1);
+                        }
+                    }
+                }
             }
         }
-
-        result1.Remove(0);
-
-        // Busqueda en anchura de hijos a padre
-        Lista result2 = new Lista();
-        Pila stack2 = new Pila();
-        stack2.Push(root);
-        int stackSize = 0;
-
-        while (stackSize <= heightLimit) {
-            Nodo currentNode = (Nodo) stack2.Pop();
-
-            if (currentNode == null) {
-                break;
-            }
-            result2.Add(currentNode);
-            
-            if (currentNode.parent != null) {
-                stack2.Push(currentNode.parent);
-            } 
-            stackSize = result2.Count();
-        }
-
-        if (result2.Count() > 0) {
-            result2.Remove(0);
-            result1.AddRange(result2);
-        }
-        
-        
-
-        return result1;
+        return visitedNodes;
     }
-    
-    public Lista DFSExtendido(Nodo input, int heightLimit){
-    
-        Nodo root = input;
-        Lista dfsRamaIzquierda = DFS(root, heightLimit);
-        Nodo parent = null;
-        
-        do {
-            if (root.parent != null){
-                parent = root.parent;
-                root = parent;
-            } else {
-                break;
-            }
-        
-        } while (parent != null);
-        
-        if (parent != null){
-            Lista dfsRamaDerecha = DFS(parent,(heightLimit)-1);
-            dfsRamaIzquierda.AddRange(dfsRamaDerecha);
-            int i = dfsRamaIzquierda.indexOf(input);
-            dfsRamaIzquierda.Remove(i);
-        }
-        return dfsRamaIzquierda;
-    }
-    
 
     /**
-     * Implementa la busqueda en profundidad de sucursales
+     * Función que filtra los nodos con base a una altura determinada.
      *
-     * @param root
-     * @param heightLimit
-     * @return
+     * @param grafo Lista de nodos a filtrar.
+     * @param heightLimit Límite de búsqueda.
+     * @return Una lista de todos los nodos que se encuentren dentro del límite
+     * específicado.
      */
-    public static Lista DFSBySucursal(Nodo root, int heightLimit) {
+    private static Lista getAllNodesByHeight(Lista grafo, int heightLimit) {
         Lista result = new Lista();
 
-        Lista query = DFS(root, heightLimit);
-
-        for (int i = 0; i < query.Count(); i++) {
-            Nodo node = (Nodo) query.get(i);
-
-            if (!node.info.isSucursal()) {
-                result.Add(node);
+        // Filter the nodes by height
+        for (int n = 0; n < grafo.count(); n++) {
+            Nodo nodo = (Nodo) grafo.get(n);
+            if (nodo.getHeight() <= heightLimit) {
+                result.add(nodo);
             }
         }
 
         return result;
     }
-    
-    public Lista DFSbySucursalExtendido(Nodo input, int heightLimit){
-    
-        Nodo root = input;
-        Lista dfsRamaIzquierda = DFS(root, heightLimit);
-        Nodo parent = null;
-        
-        do {
-            if (root.parent != null){
-                parent = root.parent;
-                root = parent;
-            } else {
-                break;
-            }
-        
-        } while (parent != null);
-        
-        if (parent != null){
-            Lista dfsRamaDerecha = DFS(parent,(heightLimit)-1);
-            dfsRamaIzquierda.AddRange(dfsRamaDerecha);
-            int i = dfsRamaIzquierda.indexOf(input);
-            dfsRamaIzquierda.Remove(i);
-        }
-        return dfsRamaIzquierda;
-    
-    }
-    
-    
+
 }
