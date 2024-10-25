@@ -5,89 +5,81 @@
 package EstructurasDeDatos;
 
 /**
+ * Esta clase define un objeto de tipo Parada. Contiene el nombre de la parada y
+ * un booleano que indica si tiene o no tiene una sucursal dentro de su rango.
+ *
  * @version 13/10/2024
  * @author Michelle García
  */
 public class Parada {
-    
+
     private String name;
     private boolean sucursal;
-    private Lista adyacentes;
 
-    public Parada(String name) {
-        this.name = name;
-        this.sucursal = false;
-        this.adyacentes = null;
-    }
-
-   
     /**
-     * @return the sucursal
+     * *
+     * Constructor de la clase Parada.
+     *
+     * @param name Nombre de la Parada
+     * @param sucursal Booleano que indique si tiene una sucursal dentro de su
+     * rango.
      */
-    public boolean hasSucursal() {
-        return isSucursal();
+    public Parada(String name, boolean sucursal) {
+        this.name = name;
+        this.sucursal = sucursal;
     }
 
     /**
-     * @param sucursal the sucursal to set
+     * Procedimiento que cambia el valor del booleano sucursal.
+     *
+     * @param sucursal Booleano true o false.
      */
     public void setSucursal(boolean sucursal) {
         this.sucursal = sucursal;
     }
 
     /**
-     * @return the adyacentes
-     */
-    public Lista getAdyacentes() {
-        return adyacentes;
-    }
-
-    /**
-     * @param adyacentes the adyacentes to set
-     */
-    public void setAdyacentes(Lista adyacentes) {
-        this.adyacentes = adyacentes;
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * @return the sucursal
+     * Función que retorna el valor del atributo sucursal.
+     *
+     * @return Booleano true o false.
      */
     public boolean isSucursal() {
         return sucursal;
     }
 
     /**
+     * Función que retorna el valor del atributo nombre.
+     *
+     * @return Nombre de la parada.
      */
-    public void seleccionar_sucursal() {
-        this.setSucursal(true);
+    public String getName() {
+        return name;
     }
 
     /**
+     * Procedimiento que cambia el nombre de la parada.
+     *
+     * @param name Nombre nuevo
      */
-    public void quitar_sucursal() {
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Procedimiento que elimina la sucursal de la parada.
+     */
+    public void quitarSucursal() {
         this.setSucursal(false);
     }
 
     /**
-     * @return
+     * Función que imprime el contenido de la parada
+     *
+     * @return String con la información del objeto parada
      */
-    public String leer_info() {
+    public String leerInfo() {
         String txt = "";
-        txt = txt + "\nNombre: " + getName();
+        txt = txt + "\nNombre: " + getName() + "Sucursal: " + isSucursal();
         return txt;
     }
 

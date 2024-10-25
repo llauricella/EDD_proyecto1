@@ -5,187 +5,188 @@
 package EstructurasDeDatos;
 
 /**
- * @version 13/10/2024
+ * Esta clase define un objeto de tipo lista. Contiene un contador de su
+ * cantidad de elementos, una lista donde se almacenan los objetos siguienres y
+ * un elemento de tipo ElementoLista.
+ *
+ * @version 24/10/2024
  * @author Michelle García
  */
 public class Lista {
 
-    private Nodo pFirst;
-    private Nodo pLast;
-    private int size;
+    private int count = 0;
+    private Lista next;
+    private ElementoLista value;
 
     /**
-     * Constructor de la clase
+     * Procedimiento para agregar un objeto en la lista
+     *
+     * @param j Elemento a agregar a la lista.
      */
-    public Lista() {
-        this.pFirst = null;
-        this.pLast = null;
-        this.size = 0;
-    }
+    public void add(Object j) {
+        if (j != null) {
+            ElementoLista newValue = new ElementoLista();
+            newValue.setValue(j);
+            newValue.setIndex(count);
 
-    /**
-     * @return the pFirst
-     */
-    public Nodo getpFirst() {
-        return pFirst;
-    }
-
-    /**
-     * @param pFirst the pFirst to set
-     */
-    public void setpFirst(Nodo pFirst) {
-        this.pFirst = pFirst;
-    }
-
-    /**
-     * @return the pLast
-     */
-    public Nodo getpLast() {
-        return pLast;
-    }
-
-    /**
-     * @param pLast the pLast to set
-     */
-    public void setpLast(Nodo pLast) {
-        this.pLast = pLast;
-    }
-
-    /**
-     * @return the size
-     */
-    public int getSize() {
-        return size;
-    }
-
-    /**
-     * @param size the size to set
-     */
-    public void setSize(int size) {
-        this.size = size;
-    }
-
-    public boolean es_vacio() {
-        return pFirst == null;
-    }
-
-    // Función para encontrar una parada por su nombre
-    public boolean encontrar(String name) {
-        Nodo aux = this.getpFirst();
-        boolean found = false;
-
-        while (aux != null) {
-            if (aux.getInfo().getName().equals(name)) {
-                found = true;
+            if (this.value == null) {
+                this.value = newValue;
             } else {
-                aux = aux.getpNext();
+                Lista actual = this;
+                while (actual.next != null) {
+                    actual = actual.next;
+                }
+                actual.next = new Lista();
+                actual.next.value = newValue;
             }
 
+            count++;
         }
-        return found;
     }
 
-    // Función para buscar una parada por su nombre
-    public Nodo buscar(String name) {
-        Nodo aux = this.getpFirst();
-        while (aux != null) {
-            if (aux.getInfo().getName().equals(name)) {
-                break;
+    /**
+     * Función para obtener un elemento según su índice dentro de la lista
+     *
+     * @param index Índice del elemento a retornar
+     * @return Elemento encontrado según su índice
+     */
+    public Object get(int index) {
+        if (index == 0) {
+            if (this.value != null) {
+                return this.value.getValue();
             } else {
-                aux = aux.getpNext();
+                return null;
             }
-        }
-        return aux;
-    }
-
-    // Función para insertar una parada al final
-    public void insertar_final(Nodo nodo) {
-        if (this.es_vacio()) {
-            this.setpFirst(nodo);
-            nodo.setpNext(null);
-            
         } else {
-            Nodo aux = this.getpFirst();
-            while (aux.getpNext() != null) {
-                aux = aux.getpNext();
-            }
-            aux.setpNext(nodo);
-            nodo.setpNext(null);
+            index--;
+            return this.next.get(index);
         }
     }
 
-    // Función para ver el contenido de la lista
-    public String leer() {
-        Nodo aux = getpFirst();
+    /**
+     * Procedimiento para eliminar un elemento de la lista según su índice
+     *
+     * @param index Indice del elemento a eliminar
+     */
+    public void remove(int index) {
+        if (index >= 0 && index < count) {
+            if (index == 0) {
+                // Si el elemento a eliminar es el primero de la lista
+                if (this.next == null) {
+                    this.value = null;
+                } else {
+                    this.value = this.next.value;
+                    this.next = this.next.next;
+                }
+            } else {
+                Lista actual = this;
+                for (int i = 0; i < index - 1; i++) {
+                    actual = actual.next;
+                }
+
+                // Elimina el elemento de la lista
+                actual.next = actual.next.next;
+            }
+
+            // Actualiza los indices del siguiente elemento
+            Lista temp = this;
+            int indiceActual = 0;
+            while (temp != null) {
+                if (temp.value != null) {
+                    temp.value.setIndex(indiceActual);
+                    indiceActual++;
+                }
+                temp = temp.next;
+            }
+
+            count--;
+        }
+    }
+
+    /**
+     * Función para contar los elementos dentro de la lista
+     *
+     * @return Cantidad de elementos de la lista
+     */
+    public int count() {
+        if (this.next == null) {
+            return 1;
+        } else {
+            return 1 + this.next.count();
+        }
+    }
+
+    /**
+     * Procedimiento para agregar los elementos de una lista externa a la lista
+     * actual
+     *
+     * @param h Lista externa
+     */
+    public void addRange(Lista h) {
+
+        if (h.count > 0) {
+            Lista actual = h;
+            while (actual.next != null && actual.value != null) {
+
+                if (!this.contains(actual.value.getValue())) {
+                    this.add(actual.value.getValue());
+                }
+                actual = actual.next;
+            }
+        }
+    }
+
+    /**
+     * Procedimiento para contener el nombre de los elementos una lista de nodos.
+     * 
+     * @return String con la información indicada.
+     */
+    public String printList() {
         String txt = "";
-
-        while (aux != null) {
-            txt = txt + aux.getInfo().leer_info();
-            aux = aux.getpNext();
+        
+        for (int i = 0; i < count(); i++) {
+            txt = txt + "\n"+ ((Nodo)get(i)).getInfo().getName();
+            System.out.print("\n"+ ((Nodo)get(i)).getInfo().getName());
         }
-
+        
         return txt;
-
     }
 
-    // Función para eliminar un elemento de la lista
-    public void eliminar(Nodo out) {
-
-        if (getpFirst() == out) {
-            setpFirst(getpFirst().getpNext());
-        } else {
-            Nodo aux = getpFirst();
-            while (aux != out) {
-                aux = aux.getpNext();
-            }
-            
-            Nodo next = aux.getpNext();
-            aux.setpNext(next);
-            setSize(getSize() - 1);
-        }
-
-    }
-
-    // Funcion para vaciar la lista
-    public void vaciar() {
-        this.pFirst = this.pLast = null;
-        this.setSize(0);
-    }
-    /*
-    // Función para eliminar el ultimo elemento de la lista
-    public void eliminar_ultimo (){
-    
-        if (getpFirst() == out){
-            setpFirst(getpFirst().getpNext());
-        }
-        else {
-            Nodo aux = getpFirst();
-            while (aux != out){
-                aux = aux.getpNext();
-            }
-            Nodo next = aux.getpNext();
-            aux.setpNext(next);
-            setSize(getSize()-1);
-        }
-    
-    }
-    
-    // Función para eliminar un elemento de la lista
-    public void eliminar_primero (Nodo out){
-    
-        if (getpFirst() == out){
-            setpFirst(getpFirst().getpNext());
-        }
-        else {
-            Nodo aux = getpFirst();
-            while (aux != out){
-                aux = aux.getpNext();
-            }
-            Nodo next = aux.getpNext();
-            aux.setpNext(next);
-            setSize(getSize()-1);
-        }
-    
-    }
+    /**
+     * Función para verificar si un objeto se encuentra dentro de la lista.
+     *
+     * @param value Objeto a encontrar
+     * @return Si el objeto se encuentra adentro, true. En caso contrario,
+     * false.
      */
+    public boolean contains(Object value) {
+
+        if (this.value != null && this.value.getValue().equals(value)) {
+            return true;
+        } else if (this.next != null) {
+            return this.next.contains(value);
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Función para obtener el índice de un elemento dentro de la lista.
+     *
+     * @param value Objeto a encontrar.
+     * @return Posición correspondiente al elemento en la lista.
+     */
+    public int indexOf(Object value) {
+        String aux = ((Nodo) this.value.getValue()).getInfo().getName();
+
+        if (this.value != null && aux.equals(((Nodo) value).getInfo().getName())) {
+            return this.value.getIndex();
+        } else {
+            if (this.next != null) {
+                return this.next.indexOf(value);
+            } else {
+                return -1;
+            }
+        }
+    }
 }
