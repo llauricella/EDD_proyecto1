@@ -109,7 +109,7 @@ public class LecturaJson {
                                                     Parada nuevaParada2 = new Parada(nombreEstacion2, false);
                                                     if (!grafo.getNodos().contains(nuevaParada)) {
                                                         grafo.addNode(nuevaParada);
-                                                        grafo.addEdge(nuevaParada, nuevaParada2);
+                                                        grafo.addEdge(nuevaParada2, nuevaParada);
                                                     }
                                                     if (ultimaParadaVisitada != null) {
                                                         grafo.addEdge(ultimaParadaVisitada, nuevaParada);
