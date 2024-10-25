@@ -5,34 +5,33 @@
 package EstructurasDeDatos;
 
 /**
+ * Esta clase define un objeto de tipo stack. Contiene una lista de elementos.
+ *
  * @version 24/10/2024
  * @author Michelle García
  */
 public class Pila {
-    /**
-     * Esta clase define un objeto de tipo stack. Contiene una lista de elementos.
-     */
-    
+
     private Lista stack = new Lista();
 
     /**
      * Procedimiento para apilar un elemento.
-     * 
+     *
      * @param j Elemento a apilar.
      */
-    public void Push(Object j) {
-        stack.Add(j);
+    public void push(Object j) {
+        stack.add(j);
     }
 
     /**
      * Función para desapilar un elemento y devolver el elemento desapilado.
-     * 
+     *
      * @return Objeto desapilado.
      */
-    public Object Pop() {
-        if (stack.Count() > 0) {
-            Object value = stack.Get(stack.Count() - 1);
-            stack.Remove(stack.Count() - 1);
+    public Object pop() {
+        if (stack.count() > 0) {
+            Object value = stack.get(stack.count() - 1);
+            stack.remove(stack.count() - 1);
             return value;
         }
         return null;
@@ -40,72 +39,56 @@ public class Pila {
 
     /**
      * Función para obtener la cantidad de elementos de la pila.
-     * 
+     *
      * @return Cantidad de elementos de la pila.
      */
     public int getCount() {
-        return stack.Count();
+        return stack.count();
     }
 
     /**
      * Función para retornar un elemento de la lista de la pila según su índice.
-     * 
+     *
      * @param index Indice de un elemento de la pila.
      * @return Elemento de la pila según el índice indicado.
      */
     public Object Get(int index) {
-        return stack.Get(index);
+        return stack.get(index);
     }
 
     /**
      * Procedimiento para eliminar un elemento de la pila según su índice.
-     * 
+     *
      * @param index Indice de un elemento de la pila.
      */
-    public void Remove(int index) {
-        stack.Remove(index);
+    public void remove(int index) {
+        stack.remove(index);
     }
 
     /**
      * Procedimiento para apilar un elemento.
-     * 
+     *
      * @param j Elemento a apilar.
      */
-    public void Add(Object j) {
-        stack.Add(j);
+    public void add(Object j) {
+        stack.add(j);
     }
 
     /**
      * Función para obtener la posicion de un elemento dentro de la pila.
-     * 
+     *
      * @param element Elemento a encontrar.
      * @return Posición del elemento.
      */
-    public int GetStackPosition(Object element) {
-        int c = stack.Count();
+    public int getStackPosition(Object element) {
+        int c = stack.count();
         for (int i = 0; i < c; i++) {
-            Object elem = stack.Get(i);
+            Object elem = stack.get(i);
 
             if (elem.equals(element)) {
                 return i;
             }
         }
-        return -1; // Element not found
-    }
-    
-    /**
-     * Procedimiento para limpiar la pila.
-     */
-    public void Clear() {
-        stack = new Lista();
-    }
-    
-    /**
-     * Procedimiento para imprimir los elementos de la pila.
-     */
-    public void printStack() {
-        for (int i = 0; i < getCount(); i++) {
-            System.out.println(stack.Get(i));
-        }
+        return -1; // El elemento no fue encontrado
     }
 }

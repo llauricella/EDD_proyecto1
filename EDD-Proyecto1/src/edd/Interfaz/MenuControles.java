@@ -3,15 +3,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package edd.Interfaz;
-import EstructurasDeDatos.LeerJSON;
+import EstructurasDeDatos.Busquedas;
+import EstructurasDeDatos.Grafo;
+import EstructurasDeDatos.Lista;
+import EstructurasDeDatos.LecturaJson;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 /**
  *
- * @author lalau
+ * @author Luigi Lauricella
  */
 public class MenuControles extends javax.swing.JFrame {
-
+    /*
+    
+    */
+    public Grafo grafo;
+    public Lista lista;
+    public int t;
+    
     /**
      * Creates new form MenuControles
      */
@@ -28,6 +37,7 @@ public class MenuControles extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         JSONButton = new javax.swing.JButton();
         JSONLabel = new javax.swing.JLabel();
         GrafoLabel = new javax.swing.JLabel();
@@ -44,6 +54,15 @@ public class MenuControles extends javax.swing.JFrame {
         BFSButton = new javax.swing.JButton();
         LineaButton = new javax.swing.JButton();
         LineaLabel = new javax.swing.JLabel();
+        CoberturaField = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ResultadosBusquedaArea = new javax.swing.JTextArea();
+        ResultadosBusquedaLabel = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        CoberturaArea = new javax.swing.JTextArea();
+        CoverturaLabel = new javax.swing.JLabel();
+
+        jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menú de Controles");
@@ -86,6 +105,12 @@ public class MenuControles extends javax.swing.JFrame {
         MenuLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         MenuLabel.setText("Menú de Controles");
 
+        SucursalField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SucursalFieldActionPerformed(evt);
+            }
+        });
+
         SucursalLabel.setText("Colocar o eliminar sucursal por nombre");
 
         SucursalButton.setText("Cambiar");
@@ -95,121 +120,170 @@ public class MenuControles extends javax.swing.JFrame {
             }
         });
 
-        CoberturaLabel.setText("Ver cobertura de sucursal por");
+        CoberturaLabel.setText("Seleccionar sucursal para búsqueda");
 
         DFSButton.setText("DFS");
+        DFSButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DFSButtonActionPerformed(evt);
+            }
+        });
 
         BFSButton.setText("BFS");
+        BFSButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BFSButtonActionPerformed(evt);
+            }
+        });
 
         LineaButton.setText("Agregar");
 
         LineaLabel.setText("Agregar linea de paradas");
+
+        ResultadosBusquedaArea.setColumns(20);
+        ResultadosBusquedaArea.setRows(5);
+        jScrollPane1.setViewportView(ResultadosBusquedaArea);
+
+        ResultadosBusquedaLabel.setText("Resultados de la búsqueda");
+
+        CoberturaArea.setColumns(20);
+        CoberturaArea.setRows(5);
+        jScrollPane2.setViewportView(CoberturaArea);
+
+        CoverturaLabel.setText("Sucursales recomendados para obtener la covertura total");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(92, 92, 92)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(JSONButton)
+                    .addComponent(JSONLabel))
+                .addGap(95, 95, 95)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(GrafoLabel)
+                    .addComponent(GrafoButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(LineaButton)
+                        .addGap(26, 26, 26))
+                    .addComponent(LineaLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(108, 108, 108))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(101, 101, 101)
+                .addComponent(CoberturaField, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(139, 139, 139)
+                        .addGap(77, 77, 77)
                         .addComponent(CoberturaLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(BFSButton)
-                                .addGap(96, 96, 96)
-                                .addComponent(DFSButton))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(JSONButton)
-                                .addComponent(JSONLabel)))
-                        .addGap(17, 17, 17)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(GrafoLabel)
-                            .addComponent(GrafoButton))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addComponent(SucursalLabel))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(SucursalField, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(32, 32, 32)
-                                .addComponent(SucursalButton)))
-                        .addGap(51, 51, 51))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(LineaButton)
-                                .addGap(26, 26, 26))
-                            .addComponent(LineaLabel, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(108, 108, 108))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(ResultadosBusquedaLabel)
+                                .addGap(51, 51, 51))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(DFSButton)
+                                    .addGap(77, 77, 77)
+                                    .addComponent(BFSButton))))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(MenuLabel)
-                        .addGap(256, 256, 256))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(55, 55, 55)
-                                .addComponent(tLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(CoverturaLabel))
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(60, 60, 60)
                                 .addComponent(tField, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(31, 31, 31)
-                                .addComponent(tButton)))
-                        .addGap(284, 284, 284))))
+                                .addGap(18, 18, 18)
+                                .addComponent(tButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(39, 39, 39))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addComponent(SucursalField, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(SucursalButton)))))
+                        .addGap(45, 45, 45))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(MenuLabel)
+                                .addGap(256, 256, 256))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(tLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(SucursalLabel)
+                                .addGap(72, 72, 72))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(MenuLabel)
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(GrafoLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(JSONLabel))
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(GrafoLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(JSONLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(JSONButton)
+                                    .addComponent(GrafoButton)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(LineaLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(LineaButton))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(130, 130, 130)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CoberturaLabel)
+                            .addComponent(tLabel)
+                            .addComponent(SucursalLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JSONButton)
-                            .addComponent(GrafoButton)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(LineaLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(LineaButton)))
-                .addGap(75, 75, 75)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(SucursalLabel)
-                    .addComponent(CoberturaLabel))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(tField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tButton)
+                                .addComponent(SucursalField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(SucursalButton)
+                                .addComponent(BFSButton))
+                            .addComponent(DFSButton))))
                 .addGap(18, 18, 18)
+                .addComponent(CoberturaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(SucursalField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DFSButton)
-                    .addComponent(SucursalButton)
-                    .addComponent(BFSButton))
-                .addGap(81, 81, 81)
-                .addComponent(tLabel)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tButton)
-                    .addComponent(tField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(50, Short.MAX_VALUE))
+                    .addComponent(ResultadosBusquedaLabel)
+                    .addComponent(CoverturaLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void GrafoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GrafoButtonActionPerformed
-        int graph = 1;
-        if (graph != 0) {
-            Grafo grafo= new Grafo();
-            grafo.show();
+        
+        if (grafo != null) {
+            GraphStream grafo1= new GraphStream(grafo);
+            grafo1.show();
         } else {
             JOptionPane.showMessageDialog(null, "ERROR, no cargaste un JSON antes.", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -221,24 +295,77 @@ public class MenuControles extends javax.swing.JFrame {
     }//GEN-LAST:event_tFieldActionPerformed
 
     private void SucursalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SucursalButtonActionPerformed
-        String SucursalNombre = SucursalField.getText();
+        if (grafo != null) {
+            String SucursalNombre = SucursalField.getText();
+            if (grafo.SelecionarParada(SucursalNombre) != null) {
+                if (grafo.SelecionarParada(SucursalNombre).getInfo().isSucursal() == false) {
+                    grafo.SelecionarParada(SucursalNombre).getInfo().setSucursal(true);
+                    JOptionPane.showMessageDialog(null, "La sucursal ha sido colocada exitosamente!", "Información", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    grafo.SelecionarParada(SucursalNombre).getInfo().setSucursal(false);
+                    JOptionPane.showMessageDialog(null, "La sucursal ha sido eliminada exitosamente!", "Información", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "ERROR, la parada seleccionada es invalida.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR, no cargaste un JSON antes.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
     }//GEN-LAST:event_SucursalButtonActionPerformed
 
     private void JSONButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JSONButtonActionPerformed
         try {
-            var JSON = new LeerJSON();
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "ERROR, el archivo no es un JSON.", "Error", JOptionPane.ERROR_MESSAGE);
+            grafo = new LecturaJson().LecturaJson();
+        } catch(IOException e) {
+            JOptionPane.showMessageDialog(null, "ERROR, tipo de dato invalido.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_JSONButtonActionPerformed
 
     private void tButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tButtonActionPerformed
         try {
             int t = Integer.parseInt(tField.getText());
+            grafo.setT(t);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "ERROR, coloca un número entero.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_tButtonActionPerformed
+
+    private void DFSButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DFSButtonActionPerformed
+        ResultadosBusquedaArea.removeAll();
+        if (grafo != null) {
+            String SucursalNombre = SucursalField.getText();
+            var NodoSeleccionado = grafo.SelecionarParada(SucursalNombre);
+            if (NodoSeleccionado != null) {
+                Lista resultados = Busquedas.DFS(NodoSeleccionado, t);                
+                ResultadosBusquedaArea.append(resultados.printList());
+            } else {
+                JOptionPane.showMessageDialog(null, "ERROR, la parada seleccionada es invalida.", "Error", JOptionPane.ERROR_MESSAGE);
+            }    
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR, no cargaste un JSON antes.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_DFSButtonActionPerformed
+
+    private void BFSButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BFSButtonActionPerformed
+        ResultadosBusquedaArea.removeAll();
+        if (grafo != null) {
+            String SucursalNombre = SucursalField.getText();
+            var NodoSeleccionado = grafo.SelecionarParada(SucursalNombre);
+            if (NodoSeleccionado != null) {
+                Lista resultados = Busquedas.BFS(NodoSeleccionado, t);                
+                ResultadosBusquedaArea.append(resultados.printList());
+            } else {
+                JOptionPane.showMessageDialog(null, "ERROR, la parada seleccionada es invalida.", "Error", JOptionPane.ERROR_MESSAGE);
+            }    
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR, no cargaste un JSON antes.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_BFSButtonActionPerformed
+
+    private void SucursalFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SucursalFieldActionPerformed
+
+    }//GEN-LAST:event_SucursalFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -277,7 +404,10 @@ public class MenuControles extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BFSButton;
+    private javax.swing.JTextArea CoberturaArea;
+    private javax.swing.JTextField CoberturaField;
     private javax.swing.JLabel CoberturaLabel;
+    private javax.swing.JLabel CoverturaLabel;
     private javax.swing.JButton DFSButton;
     private javax.swing.JButton GrafoButton;
     private javax.swing.JLabel GrafoLabel;
@@ -286,9 +416,14 @@ public class MenuControles extends javax.swing.JFrame {
     private javax.swing.JButton LineaButton;
     private javax.swing.JLabel LineaLabel;
     private javax.swing.JLabel MenuLabel;
+    private javax.swing.JTextArea ResultadosBusquedaArea;
+    private javax.swing.JLabel ResultadosBusquedaLabel;
     private javax.swing.JButton SucursalButton;
     private javax.swing.JTextField SucursalField;
     private javax.swing.JLabel SucursalLabel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton tButton;
     private javax.swing.JTextField tField;
     private javax.swing.JLabel tLabel;

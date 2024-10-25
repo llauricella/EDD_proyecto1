@@ -5,23 +5,22 @@
 package EstructurasDeDatos;
 
 /**
+ * Esta clase define un objeto de tipo cola. Contiene una lista de los elementos encolados.
+ * 
  * @version 24/10/2024
  * @author Michelle García
  */
 public class Cola {
-    /**
-     * Esta clase define un objeto de tipo cola. Contiene una lista de los elementos encolados.
-     *
-     */
+    
     private Lista queue = new Lista();
 
     /**
-     *  Procedimiento para encolar un objeto
+     * Procedimiento para encolar un objeto
      * 
      * @param j Objeto a encolar
      */
     public void enqueue(Object j) {
-        queue.Add(j);
+        getQueue().add(j);
     }
 
     
@@ -31,21 +30,21 @@ public class Cola {
      * @return Primer elemento de la cola
      */
     public Object dequeue() {
-        if (queue.Count() > 0) {
-            Object value = queue.Get(0);
-            queue.Remove(0);
+        if (getQueue().count() > 0) {
+            Object value = getQueue().get(0);
+            getQueue().remove(0);
             return value;
         }
         return null;
     }
 
     /**
-     *  Función para obtener la cantidad de elementos encolados en una cola
+     * Función para obtener la cantidad de elementos encolados en una cola
      * 
      * @return Cantidad de elementos encolados en la cola actual
      */
     public int getCount() {
-        return queue.Count();
+        return getQueue().count();
     }
 
     /**
@@ -55,16 +54,18 @@ public class Cola {
      * @return Objeto según la posición
      */
     public Object get(int index) {
-        return queue.Get(index);
+        return getQueue().get(index);
+    }
+
+    /**
+     * Función para obtener la cola actual
+     * 
+     * @return Cola actual
+     */
+    public Lista getQueue() {
+        return queue;
     }
     
-    /**
-     * Procedimiento para imprimir los elementos de la cola.
-     */
-    public void printQueue() {
-        for (int i = 0; i < getCount(); i++) {
-            System.out.println(queue.Get(i));
-        }
-    }
+    
 
 }
