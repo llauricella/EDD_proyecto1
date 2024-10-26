@@ -183,15 +183,15 @@ public class Busquedas {
      */
     private static Lista getAllNodesByHeight(Lista grafo, int heightLimit) {
         Lista result = new Lista();
-
-        // Filter the nodes by height
         for (int n = 0; n < grafo.count(); n++) {
             Nodo nodo = (Nodo) grafo.get(n);
-            if (nodo.getHeight() <= heightLimit) {
+            if (!result.contains(nodo)) {
+                if (nodo.getHeight() <= heightLimit) {
                 result.add(nodo);
+                }
             }
+ 
         }
-
         return result;
     }
 

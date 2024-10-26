@@ -6,6 +6,7 @@ package edd.Interfaz;
 import EstructurasDeDatos.Busquedas;
 import EstructurasDeDatos.Grafo;
 import EstructurasDeDatos.Lista;
+import EstructurasDeDatos.Nodo;
 import EstructurasDeDatos.LecturaJson;
 import org.graphstream.graph.*;
 import java.io.IOException;
@@ -15,7 +16,7 @@ import javax.swing.JOptionPane;
  * @author Luigi Lauricella
  */
 public class MenuControles extends javax.swing.JFrame {
-    private GraphStream graphstream;
+    public GraphStream graphstream;
     public Grafo grafo;
     public Lista lista;
     public int t;
@@ -149,14 +150,14 @@ public class MenuControles extends javax.swing.JFrame {
         CoberturaArea.setRows(5);
         jScrollPane2.setViewportView(CoberturaArea);
 
-        CoverturaLabel.setText("Sucursales recomendados para obtener la covertura total");
+        CoverturaLabel.setText("Sucursales recomendadas para obtener la covertura total");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(98, 647, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(LineaButton)
@@ -176,25 +177,15 @@ public class MenuControles extends javax.swing.JFrame {
                                     .addComponent(DFSButton)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(BFSButton))
-                                .addComponent(CoberturaLabel))))
+                                .addComponent(CoberturaLabel, javax.swing.GroupLayout.Alignment.LEADING))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(133, 133, 133)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(JSONLabel)
                             .addComponent(JSONButton))))
-                .addGap(81, 81, 81)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(tField, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)
-                        .addComponent(tButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-                        .addComponent(SucursalField, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(SucursalButton)
-                        .addGap(45, 45, 45))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
+                        .addGap(122, 122, 122)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(GrafoLabel)
@@ -205,28 +196,36 @@ public class MenuControles extends javax.swing.JFrame {
                                     .addComponent(tLabel))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(SucursalLabel)
-                                .addGap(72, 72, 72))))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(328, 328, 328)
-                .addComponent(MenuLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(72, 72, 72))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(CoverturaLabel)
+                        .addGap(45, 45, 45))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(ResultadosBusquedaLabel)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(51, 51, 51)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(CoverturaLabel)
+                        .addGap(86, 86, 86)
+                        .addComponent(tField, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tButton)
+                        .addGap(55, 55, 55)
+                        .addComponent(SucursalField, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(SucursalButton)
+                        .addGap(0, 42, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(222, 222, 222)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)))
-                .addGap(45, 45, 45))
+                        .addGap(328, 328, 328)
+                        .addComponent(MenuLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(98, 98, 98)
+                        .addComponent(ResultadosBusquedaLabel)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -263,17 +262,17 @@ public class MenuControles extends javax.swing.JFrame {
                             .addComponent(SucursalButton)
                             .addComponent(CoberturaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DFSButton)
-                    .addComponent(BFSButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CoverturaLabel)
-                    .addComponent(ResultadosBusquedaLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(DFSButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(BFSButton, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ResultadosBusquedaLabel)
+                    .addComponent(CoverturaLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2))
                 .addGap(25, 25, 25))
         );
 
@@ -281,14 +280,13 @@ public class MenuControles extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void GrafoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GrafoButtonActionPerformed
-
         if (grafo != null) {
             GraphStream grafo1= new GraphStream(grafo);
+            graphstream = grafo1;
             grafo1.show();
         } else {
             JOptionPane.showMessageDialog(null, "ERROR, no cargaste un JSON antes.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        
+        }        
     }//GEN-LAST:event_GrafoButtonActionPerformed
 
     private void tFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tFieldActionPerformed
@@ -299,29 +297,41 @@ public class MenuControles extends javax.swing.JFrame {
         if (grafo != null) {
             var red = graphstream.getGraphstream();
             String SucursalNombre = SucursalField.getText();
-            if (grafo.SelecionarParada(SucursalNombre) != null) {
-                Node node = red.getNode(SucursalNombre);
-                if (grafo.SelecionarParada(SucursalNombre).getInfo().isSucursal() == false) {
-                    node.setAttribute("ui.style", "fill-color: red;");
-                    grafo.SelecionarParada(SucursalNombre).getInfo().setSucursal(true);
-                    JOptionPane.showMessageDialog(null, "La sucursal ha sido colocada exitosamente!", "Información", JOptionPane.INFORMATION_MESSAGE);
-                } else {
+            var NodoSeleccionado = grafo.SelecionarParada(SucursalNombre);
+            if (NodoSeleccionado != null) {
+                for (Node node : red) {
                     node.setAttribute("ui.style", "fill-color: grey;");
-                    grafo.SelecionarParada(SucursalNombre).getInfo().setSucursal(false);
-                    JOptionPane.showMessageDialog(null, "La sucursal ha sido eliminada exitosamente!", "Información", JOptionPane.INFORMATION_MESSAGE);
+                    if (node.getId().equalsIgnoreCase(SucursalNombre)){
+                        if (grafo.SelecionarParada(SucursalNombre).getInfo().isSucursal() == false) {
+                            node.setAttribute("ui.style", "fill-color: red;");
+                            grafo.SelecionarParada(SucursalNombre).getInfo().setSucursal(true);
+                            JOptionPane.showMessageDialog(null, "La sucursal ha sido colocada exitosamente!", "Información", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            node.setAttribute("ui.style", "fill-color: grey;");
+                            grafo.SelecionarParada(SucursalNombre).getInfo().setSucursal(false);
+                            JOptionPane.showMessageDialog(null, "La sucursal ha sido eliminada exitosamente!", "Información", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    }
                 }
+                Lista resultadosBFS = Busquedas.BFSSucursal(NodoSeleccionado, grafo.getT());
+                for (int i = 0; i < resultadosBFS.count(); i++) {
+                    Nodo aux = (Nodo)resultadosBFS.get(i);
+                    CoberturaArea.append(aux.getInfo().getName());
+                }
+                
             } else {
                 JOptionPane.showMessageDialog(null, "ERROR, la parada seleccionada es invalida.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(null, "ERROR, no cargaste un JSON antes.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
+        SucursalField.setText("");
     }//GEN-LAST:event_SucursalButtonActionPerformed
 
     private void JSONButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JSONButtonActionPerformed
         try {
             grafo = new LecturaJson().LecturaJson();
+            t = new LecturaJson().getT();
         } catch(IOException e) {
             JOptionPane.showMessageDialog(null, "ERROR, tipo de dato invalido.", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -330,7 +340,7 @@ public class MenuControles extends javax.swing.JFrame {
     private void tButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tButtonActionPerformed
         if (grafo != null) {
             try {
-                int t = Integer.parseInt(tField.getText());
+                t = Integer.parseInt(tField.getText());
                 grafo.setT(t);
                 JOptionPane.showMessageDialog(null, "T ha sido cambiado a " + t + " exitosamente!", "Información", JOptionPane.INFORMATION_MESSAGE);
             } catch (NumberFormatException e) {
@@ -339,17 +349,31 @@ public class MenuControles extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "ERROR, no cargaste un JSON antes.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        tField.setText("");
     }//GEN-LAST:event_tButtonActionPerformed
 
     private void DFSButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DFSButtonActionPerformed
-        ResultadosBusquedaArea.removeAll();
+        ResultadosBusquedaArea.setText("");
         if (grafo != null) {
-            String SucursalNombre = SucursalField.getText();
+            var red = graphstream.getGraphstream();
+            String SucursalNombre = CoberturaField.getText();
             var NodoSeleccionado = grafo.SelecionarParada(SucursalNombre);
-            System.out.println(NodoSeleccionado.getInfo().getName());
             if (NodoSeleccionado != null) {
-                Lista resultados = Busquedas.DFS(NodoSeleccionado, t);                
-                ResultadosBusquedaArea.append(resultados.printList());
+                Lista resultados = Busquedas.DFS(NodoSeleccionado, grafo.getT());
+                for (Node node : red) {
+                    for (int i = 0; i < resultados.count(); i++){
+                        Nodo aux = (Nodo)resultados.get(i);
+                        if (node.getId().equalsIgnoreCase(aux.getInfo().getName())){
+                            if ("red".equals(node.getAttribute("ui.style"))) {
+                                node.setAttribute("ui.style", "fill-color: purple;");
+                            } else {
+                                node.setAttribute("ui.style", "fill-color: blue;");
+                            }
+                        }
+                    }
+                }
+                CoberturaField.setText("");
+                ResultadosBusquedaArea.setText(resultados.printList());
             } else {
                 JOptionPane.showMessageDialog(null, "ERROR, la parada seleccionada es invalida.", "Error", JOptionPane.ERROR_MESSAGE);
             }    
@@ -359,13 +383,27 @@ public class MenuControles extends javax.swing.JFrame {
     }//GEN-LAST:event_DFSButtonActionPerformed
 
     private void BFSButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BFSButtonActionPerformed
-        ResultadosBusquedaArea.removeAll();
+        ResultadosBusquedaArea.setText("");
         if (grafo != null) {
-            String SucursalNombre = SucursalField.getText();
+            var red = graphstream.getGraphstream();
+            String SucursalNombre = CoberturaField.getText();
             var NodoSeleccionado = grafo.SelecionarParada(SucursalNombre);
             if (NodoSeleccionado != null) {
-                Lista resultados = Busquedas.BFS(NodoSeleccionado, t);                
-                ResultadosBusquedaArea.append(resultados.printList());
+                Lista resultados = Busquedas.BFS(NodoSeleccionado, grafo.getT());
+                for (Node node : red) {
+                    for (int i = 0; i < resultados.count(); i++){
+                        Nodo aux = (Nodo)resultados.get(i);
+                        if (node.getId().equalsIgnoreCase(aux.getInfo().getName())){
+                            if ("red".equals(node.getAttribute("ui.style"))) {
+                                node.setAttribute("ui.style", "fill-color: yellow;");
+                            } else {
+                                node.setAttribute("ui.style", "fill-color: blue;");
+                            }
+                        }
+                    }
+                }
+                CoberturaField.setText("");
+                ResultadosBusquedaArea.setText(resultados.printList());
             } else {
                 JOptionPane.showMessageDialog(null, "ERROR, la parada seleccionada es invalida.", "Error", JOptionPane.ERROR_MESSAGE);
             }    

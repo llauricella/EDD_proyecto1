@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class LecturaJson {
     public Grafo grafo;
-
+    private int t;
     /**
      * @return 
      * @throws java.io.IOException
@@ -28,14 +28,13 @@ public class LecturaJson {
         chooser.showOpenDialog(null);
         var file = chooser.getSelectedFile();
         Lista listaPrimeros = new Lista();
-        int t = 0;
+        setT(0);
         if ("Caracas.json".equals(file.getName())) {
-            t = 3;
+            setT(3);
         } else if ("Bogota.json".equals(file.getName())) {
-            t = 10;
+            setT(10);
         }
-        grafo = new Grafo(t);
-
+        grafo = new Grafo(getT());
         try {
             if (file != null) {
 
@@ -146,5 +145,20 @@ public class LecturaJson {
         return grafo;
 
     }
+
+    /**
+     * @return the t
+     */
+    public int getT() {
+        return t;
+    }
+
+    /**
+     * @param t the t to set
+     */
+    public void setT(int t) {
+        this.t = t;
+    }
+    
 
 }
