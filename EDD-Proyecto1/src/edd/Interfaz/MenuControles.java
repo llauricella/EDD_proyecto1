@@ -19,7 +19,6 @@ public class MenuControles extends javax.swing.JFrame {
     public GraphStream graphstream;
     public Grafo grafo;
     public Lista lista;
-    public int t;
     
     /**
      * Creates new form MenuControles
@@ -294,13 +293,13 @@ public class MenuControles extends javax.swing.JFrame {
     }//GEN-LAST:event_tFieldActionPerformed
 
     private void SucursalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SucursalButtonActionPerformed
+        CoberturaArea.setText("");
         if (grafo != null) {
             var red = graphstream.getGraphstream();
             String SucursalNombre = SucursalField.getText();
-            var NodoSeleccionado = grafo.SelecionarParada(SucursalNombre);
+            Nodo NodoSeleccionado = grafo.SelecionarParada(SucursalNombre);
             if (NodoSeleccionado != null) {
                 for (Node node : red) {
-                    node.setAttribute("ui.style", "fill-color: grey;");
                     if (node.getId().equalsIgnoreCase(SucursalNombre)){
                         if (grafo.SelecionarParada(SucursalNombre).getInfo().isSucursal() == false) {
                             node.setAttribute("ui.style", "fill-color: red;");
@@ -314,11 +313,10 @@ public class MenuControles extends javax.swing.JFrame {
                     }
                 }
                 Lista resultadosBFS = Busquedas.BFSSucursal(NodoSeleccionado, grafo.getT());
-                for (int i = 0; i < resultadosBFS.count(); i++) {
+                for (int i = 0; i < resultadosBFS.count(); i++){
                     Nodo aux = (Nodo)resultadosBFS.get(i);
-                    CoberturaArea.append(aux.getInfo().getName());
+                    CoberturaArea.append(aux.getInfo().getName() + "/n");
                 }
-                
             } else {
                 JOptionPane.showMessageDialog(null, "ERROR, la parada seleccionada es invalida.", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -331,7 +329,6 @@ public class MenuControles extends javax.swing.JFrame {
     private void JSONButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JSONButtonActionPerformed
         try {
             grafo = new LecturaJson().LecturaJson();
-            t = new LecturaJson().getT();
         } catch(IOException e) {
             JOptionPane.showMessageDialog(null, "ERROR, tipo de dato invalido.", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -340,9 +337,9 @@ public class MenuControles extends javax.swing.JFrame {
     private void tButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tButtonActionPerformed
         if (grafo != null) {
             try {
-                t = Integer.parseInt(tField.getText());
-                grafo.setT(t);
-                JOptionPane.showMessageDialog(null, "T ha sido cambiado a " + t + " exitosamente!", "Información", JOptionPane.INFORMATION_MESSAGE);
+                int new_t = Integer.parseInt(tField.getText());
+                grafo.setT(new_t);
+                JOptionPane.showMessageDialog(null, "T ha sido cambiado a " + new_t + " exitosamente!", "Información", JOptionPane.INFORMATION_MESSAGE);
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "ERROR, coloca un número entero.", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -355,28 +352,33 @@ public class MenuControles extends javax.swing.JFrame {
     private void DFSButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DFSButtonActionPerformed
         ResultadosBusquedaArea.setText("");
         if (grafo != null) {
-            var red = graphstream.getGraphstream();
-            String SucursalNombre = CoberturaField.getText();
-            var NodoSeleccionado = grafo.SelecionarParada(SucursalNombre);
-            if (NodoSeleccionado != null) {
-                Lista resultados = Busquedas.DFS(NodoSeleccionado, grafo.getT());
-                for (Node node : red) {
-                    for (int i = 0; i < resultados.count(); i++){
-                        Nodo aux = (Nodo)resultados.get(i);
-                        if (node.getId().equalsIgnoreCase(aux.getInfo().getName())){
-                            if ("red".equals(node.getAttribute("ui.style"))) {
-                                node.setAttribute("ui.style", "fill-color: purple;");
-                            } else {
-                                node.setAttribute("ui.style", "fill-color: blue;");
+            if (graphstream != null){
+                var red = graphstream.getGraphstream();
+                String SucursalNombre = CoberturaField.getText();
+                var NodoSeleccionado = grafo.SelecionarParada(SucursalNombre);
+                if (NodoSeleccionado != null) {
+                    Lista resultados = Busquedas.DFS(NodoSeleccionado, grafo.getT());
+                    for (Node node : red) {
+                        for (int i = 0; i < resultados.count(); i++){
+                            Nodo aux = (Nodo)resultados.get(i);
+                                if (node.getId().equalsIgnoreCase(aux.getInfo().getName())){
+                                    System.out.println(node.getAttribute("ui.style").toString().contains("fill-color: red"));
+                                    if (node.getAttribute("ui.style").toString().contains("fill-color: red")) {
+                                        node.setAttribute("ui.style", "fill-color: purple;");
+                                    } else {
+                                        node.setAttribute("ui.style", "fill-color: blue;");
+                                    }
+                                }
                             }
                         }
-                    }
-                }
-                CoberturaField.setText("");
-                ResultadosBusquedaArea.setText(resultados.printList());
+                        CoberturaField.setText("");
+                        ResultadosBusquedaArea.setText(resultados.printList());
+                } else {
+                    JOptionPane.showMessageDialog(null, "ERROR, la parada seleccionada es invalida.", "Error", JOptionPane.ERROR_MESSAGE);
+                }    
             } else {
-                JOptionPane.showMessageDialog(null, "ERROR, la parada seleccionada es invalida.", "Error", JOptionPane.ERROR_MESSAGE);
-            }    
+                JOptionPane.showMessageDialog(null, "ERROR, muestra el grafo para observar los resultados.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         } else {
             JOptionPane.showMessageDialog(null, "ERROR, no cargaste un JSON antes.", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -385,28 +387,32 @@ public class MenuControles extends javax.swing.JFrame {
     private void BFSButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BFSButtonActionPerformed
         ResultadosBusquedaArea.setText("");
         if (grafo != null) {
-            var red = graphstream.getGraphstream();
-            String SucursalNombre = CoberturaField.getText();
-            var NodoSeleccionado = grafo.SelecionarParada(SucursalNombre);
-            if (NodoSeleccionado != null) {
-                Lista resultados = Busquedas.BFS(NodoSeleccionado, grafo.getT());
-                for (Node node : red) {
-                    for (int i = 0; i < resultados.count(); i++){
-                        Nodo aux = (Nodo)resultados.get(i);
-                        if (node.getId().equalsIgnoreCase(aux.getInfo().getName())){
-                            if ("red".equals(node.getAttribute("ui.style"))) {
-                                node.setAttribute("ui.style", "fill-color: yellow;");
-                            } else {
-                                node.setAttribute("ui.style", "fill-color: blue;");
+            if (graphstream != null){
+                var red = graphstream.getGraphstream();
+                String SucursalNombre = CoberturaField.getText();
+                var NodoSeleccionado = grafo.SelecionarParada(SucursalNombre);
+                if (NodoSeleccionado != null) {
+                    Lista resultados = Busquedas.BFS(NodoSeleccionado, grafo.getT());
+                    for (Node node : red) {
+                        for (int i = 0; i < resultados.count(); i++){
+                            Nodo aux = (Nodo)resultados.get(i);
+                                if (node.getId().equalsIgnoreCase(aux.getInfo().getName())){
+                                    if ("red".equals(node.getAttribute("ui.style"))) {
+                                        node.setAttribute("ui.style", "fill-color: yellow;");
+                                    } else {
+                                        node.setAttribute("ui.style", "fill-color: blue;");
+                                    }
+                                }
                             }
                         }
-                    }
-                }
-                CoberturaField.setText("");
-                ResultadosBusquedaArea.setText(resultados.printList());
+                        CoberturaField.setText("");
+                        ResultadosBusquedaArea.setText(resultados.printList());
+                } else {
+                    JOptionPane.showMessageDialog(null, "ERROR, la parada seleccionada es invalida.", "Error", JOptionPane.ERROR_MESSAGE);
+                }    
             } else {
-                JOptionPane.showMessageDialog(null, "ERROR, la parada seleccionada es invalida.", "Error", JOptionPane.ERROR_MESSAGE);
-            }    
+                JOptionPane.showMessageDialog(null, "ERROR, muestra el grafo para observar los resultados.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         } else {
             JOptionPane.showMessageDialog(null, "ERROR, no cargaste un JSON antes.", "Error", JOptionPane.ERROR_MESSAGE);
         }

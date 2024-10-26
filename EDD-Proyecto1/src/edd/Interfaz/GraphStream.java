@@ -110,24 +110,6 @@ public class GraphStream extends JFrame implements ViewerListener {
     @Override
     public void mouseLeft(String id) {}
 
-    // Método para alternar el color del nodo clicado entre gris y rojo
-    private void toggleNodeColor(String nodeName) {
-        Node node = getGraphstream().getNode(nodeName);
-        if (node != null) {
-            String currentStyle = String.valueOf(node.getAttribute("ui.style"));
-            if (currentStyle.contains("red")) {
-                node.setAttribute("ui.style", "fill-color: grey;");
-                System.out.println("Node " + nodeName + " color changed to grey.");
-            } else {
-                node.setAttribute("ui.style", "fill-color: red;");
-                System.out.println("Node " + nodeName + " color changed to red.");
-            }
-        } else {
-            System.out.println("Node " + nodeName + " does not exist.");
-        }
-    }
-
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
