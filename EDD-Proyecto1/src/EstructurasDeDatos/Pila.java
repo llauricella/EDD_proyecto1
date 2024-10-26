@@ -91,13 +91,4 @@ public class Pila {
         }
         return -1; // El elemento no fue encontrado
     }
-
-    /**
-     * Procedimiento para imprimir los elementos de la pila.
-     */
-    public void printStack() {
-        for (int i = 0; i < getCount(); i++) {
-            System.out.println(stack.get(i));
-        }
-    }
 }

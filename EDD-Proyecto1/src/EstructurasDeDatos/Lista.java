@@ -137,12 +137,19 @@ public class Lista {
     }
 
     /**
-     * Procedimiento para imprimir los elementos de la lista.
+     * Procedimiento para contener el nombre de los elementos una lista de nodos.
+     * 
+     * @return String con la información indicada.
      */
-    public void printList() {
+    public String printList() {
+        String txt = "";
+        
         for (int i = 0; i < count(); i++) {
-            System.out.println(get(i));
+            txt = txt + "\n"+ ((Nodo)get(i)).getInfo().getName();
+            System.out.print("\n"+ ((Nodo)get(i)).getInfo().getName());
         }
+        
+        return txt;
     }
 
     /**

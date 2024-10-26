@@ -98,6 +98,23 @@ public class Grafo {
             System.out.println();
         }
     }
+    
+    /**
+     * Procedimiento para imprimir los elementos de la lista de nodos.
+     * @param name
+     * @return 
+     */
+    public Nodo SelecionarParada(String name){
+        for (int x = 0; x < nodos.count(); x++) {
+            Nodo n = (Nodo) nodos.get(x);
+            String nombreNodo = n.getInfo().getName();
+            if (nombreNodo.equalsIgnoreCase(name)) {
+                return n;
+            }
+        }
+        return null; 
+    }
+    
 
     /**
      * Función para obtener el valor del atributo t. Es el límite de búsqueda
@@ -115,6 +132,13 @@ public class Grafo {
      */
     public void setT(int t) {
         this.t = t;
+    }
+
+    /**
+     * @return the nodos
+     */
+    public Lista getNodos() {
+        return nodos;
     }
 
 }

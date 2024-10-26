@@ -14,11 +14,11 @@ import org.graphstream.ui.swing_viewer.SwingViewer;
  * @version 23/10/2024
  * @author Luigi Lauricella
  */
-public class Menu extends JFrame implements ViewerListener {
+public class Grafo extends JFrame implements ViewerListener {
     private Graph graph;
     private boolean loop = true;
 
-    public Menu() {
+    public Grafo() {
         initComponents();
         initGraph(); // Inicializa el grafo
         run(); // Inicia el visualizador
@@ -103,12 +103,6 @@ public class Menu extends JFrame implements ViewerListener {
     private void initComponents() {
 
         GraphStreamPanel = new javax.swing.JPanel();
-        SucursalField = new javax.swing.JTextField();
-        SucursalButton = new javax.swing.JButton();
-        SucursalLabel = new javax.swing.JLabel();
-        tLabel = new javax.swing.JLabel();
-        tField = new javax.swing.JTextField();
-        tBotton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -116,76 +110,26 @@ public class Menu extends JFrame implements ViewerListener {
         GraphStreamPanel.setLayout(GraphStreamPanelLayout);
         GraphStreamPanelLayout.setHorizontalGroup(
             GraphStreamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 627, Short.MAX_VALUE)
         );
         GraphStreamPanelLayout.setVerticalGroup(
             GraphStreamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGap(0, 472, Short.MAX_VALUE)
         );
-
-        SucursalButton.setText("Insertar");
-        SucursalButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SucursalButtonActionPerformed(evt);
-            }
-        });
-
-        SucursalLabel.setText("Colocar o retirar sucursales por su nombre");
-
-        tLabel.setText("Establecer T");
-
-        tBotton.setText("Establecer");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(139, 139, 139)
-                .addComponent(GraphStreamPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(139, 139, 139))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(SucursalLabel)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(SucursalField, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60)
-                        .addComponent(SucursalButton)))
-                .addGap(102, 102, 102)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(tField, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
-                        .addComponent(tBotton))
-                    .addComponent(tLabel))
-                .addContainerGap(125, Short.MAX_VALUE))
+            .addComponent(GraphStreamPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addComponent(GraphStreamPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(SucursalLabel)
-                    .addComponent(tLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(SucursalField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SucursalButton)
-                    .addComponent(tField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tBotton))
-                .addGap(43, 43, 43))
+            .addComponent(GraphStreamPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void SucursalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SucursalButtonActionPerformed
-        // getText del Field para sacar el nombre de la sucursal
-        String SucursalName = SucursalField.getText();
-    }//GEN-LAST:event_SucursalButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,21 +144,15 @@ public class Menu extends JFrame implements ViewerListener {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Grafo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Menu().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new Grafo().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel GraphStreamPanel;
-    private javax.swing.JButton SucursalButton;
-    private javax.swing.JTextField SucursalField;
-    private javax.swing.JLabel SucursalLabel;
-    private javax.swing.JButton tBotton;
-    private javax.swing.JTextField tField;
-    private javax.swing.JLabel tLabel;
     // End of variables declaration//GEN-END:variables
 
 

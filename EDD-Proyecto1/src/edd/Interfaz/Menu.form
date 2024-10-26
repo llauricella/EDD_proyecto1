@@ -23,30 +23,98 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" pref="139" max="-2" attributes="0"/>
+              <Component id="GraphStreamPanel" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="139" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="SucursalLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="SucursalField" min="-2" pref="272" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                      <Component id="SucursalButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="tField" min="-2" pref="78" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="tBotton" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="tLabel" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="125" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+              <Component id="GraphStreamPanel" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="SucursalLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="SucursalField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="SucursalButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tBotton" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="jPanel1">
+    <Container class="javax.swing.JPanel" name="GraphStreamPanel">
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="400" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="394" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
     </Container>
+    <Component class="javax.swing.JTextField" name="SucursalField">
+    </Component>
+    <Component class="javax.swing.JButton" name="SucursalButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Insertar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SucursalButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="SucursalLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Colocar o retirar sucursales por su nombre"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="tLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Establecer T"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tField">
+    </Component>
+    <Component class="javax.swing.JButton" name="tBotton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Establecer"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>

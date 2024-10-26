@@ -56,15 +56,6 @@ public class Cola {
     public Object get(int index) {
         return getQueue().get(index);
     }
-    
-    /**
-     * Procedimiento para imprimir los elementos de la cola.
-     */
-    public void printQueue() {
-        for (int i = 0; i < getCount(); i++) {
-            System.out.println(getQueue().get(i));
-        }
-    }
 
     /**
      * Función para obtener la cola actual
