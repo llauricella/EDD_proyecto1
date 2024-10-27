@@ -8,114 +8,138 @@ package EstructurasDeDatos;
  * Esta clase define un objeto grafo que contenga una lista de paradas y un
  * entero para indicar el rango de búsqueda actual
  *
+ * @version 27/10/2024
  * @author Michelle García
- * @version 13/10/2024
  */
 public class Grafo {
 
-    private Lista paradas;
+    private Lista nodos;
+    private int t;
 
     /**
-     * Constructor de la clase grafo
+     * *
+     * Constructor de la clase Grafo. Inicializa la lista de nodos en vacío.
      *
-     * @param paradas Define la lista de paradas correspondientes al grafo
+     * @param t Valor del límite de búsqueda.
      */
-    public Grafo(Lista paradas) {
-        this.paradas = paradas;
+    public Grafo(int t) {
+        this.nodos = new Lista();
+        this.t = t;
     }
 
     /**
-     * Método que devuelve la lista que contiene las paradas del grafo
+     * *
+     * Procedimiento para agregar un nodo a la lista de nodos.
      *
-     * @return Lista actual de paradas
+     * @param data Objeto de tipo parada
      */
-    public Lista getParadas() {
-        return paradas;
+    public void addNode(Parada data) {
+        Nodo n = new Nodo(data);
+        nodos.add(n);
     }
 
     /**
-     * Procedimiento que introduce una lista de paradas dentro del grafo dada
-     * una lista nueva
+     * *
+     * Procedimiento para crear una arista entre dos nodos. Los nodos deben de
+     * haber sido creados previamente para poder ejecutar el método.
      *
-     * @param paradas Nueva lista de paradas
+     * @param Origen Nodo de partida.
+     * @param Destino Nodo de llegada.
      */
-    public void setParadas(Lista paradas) {
-        this.paradas = paradas;
-    }
-
-    /**
-     * Método para encontrar si las sucursales actuales del grafo cubren toda
-     * una ciudad
-     *
-     * @return Un string donde se encuentre la información acorde a los
-     * resultados
-     */
-    public String cobertura_total() {
-        String txt = "";
-        
-        // Testing 
-        
-        /*
-        Nodo first = this.getParadas().getpFirst();
-        DFS dfs = new DFS(getParadas());
-        Lista pendientes = dfs.obtener_cobertura(first);
-        
-
-        if (pendientes == null) {
-            txt = "Las sucursales cubren toda la ciudad";
-        } else {
-            txt = txt + "Sucursales recomendadas para lograr la cobertura total: \n"
-                    + pendientes.leer();
+    public void addEdge(Parada Origen, Parada Destino) {
+        Nodo n1 = null;
+        Nodo n2 = null;
+        for (int x = 0; x < nodos.count(); x++) {
+            Nodo n = (Nodo) nodos.get(x);
+            if (n.getInfo().getName().equals(Origen.getName())) {
+                n1 = n;
+            }
+            if (n.getInfo().getName().equals(Destino.getName())) {
+                n2 = n;
+            }
         }
-        */
-        
-        /*
-        Nodo first = this.getParadas().getpFirst();
-        BFS bfs = new BFS ();
-        Lista pendientes = bfs.obtener_cobertura(first);
-
-        if (pendientes == null) {
-            txt = "Las sucursales cubren toda la ciudad";
-        } else {
-            txt = txt + "Sucursales recomendadas para lograr la cobertura total: \n"
-                    + pendientes.leer();
+        if (n1 != null && n2 != null) {
+            n1.getChildren().add(n2);
+            n2.setParent(n1);
         }
-        */
-        
-        return txt;
     }
 
     /**
-     * Método que devuelve una lista de las paradas más cercanas a una parada
-     * específica según DFS
+     * *
+     * Función para obtener un nodo en función de su objeto parada.
      *
-     * @param origen Nodo desde el cual se empezará la búsqueda
-     * @param objetivo Nodo a encontrar
-     * @param t Rango de búsqueda
-     * @return Lista que contenga las paradas más cercanas dentro del rango
-     * indicado
+     * @param data Objeto parada del nodo a buscar.
+     * @return Nodo encontrado según la Parada introducida.
      */
-    public Lista cobertura_profundidad(Nodo origen, Nodo objetivo, int t) {
-        DFS dfs = new DFS(getParadas());
-        Lista encontrados = dfs.buscar_adyacentes(origen, t, objetivo);
-        return encontrados;
+    public Nodo getNode(Parada data) {
+        for (int x = 0; x < nodos.count(); x++) {
+            Nodo n = (Nodo) nodos.get(x);
+            if (n.getInfo().getName().equals(data.getName())) {
+                return n;
+            }
+        }
+        return null;
     }
 
     /**
-     * Método que devuelve una lista de las paradas más cercanas a una parada
-     * específica según BFS
-     *
-     * @param origen Nodo desde el cual se empezará la búsqueda
-     * @param objetivo Nodo a encontrar
-     * @param t Rango de búsqueda
-     * @return Lista que contenga las paradas más cercanas dentro del rango
-     * indicado
+     * Procedimiento para imprimir los elementos de la lista de nodos.
      */
-    public Lista cobertura_amplitud(Nodo origen, Nodo objetivo, int t) {
-        BFS bfs = new BFS();
-        Lista encontrados = bfs.buscar_adyacentes(origen, t, objetivo);
-        return encontrados;
+    public void printGrafo() {
+        for (int x = 0; x < nodos.count(); x++) {
+            Nodo n = (Nodo) nodos.get(x);
+            System.out.print(n.getInfo().getName() + ": ");
+
+            for (int k = 0; k < n.getChildren().count(); k++) {
+                Nodo c = (Nodo) n.getChildren().get(k);
+                if (c != null) {
+                    System.out.print(c.getInfo().getName() + " ");
+                }
+            }
+            System.out.println();
+        }
+    }
+    
+    /**
+     * Función para imprimir los elementos de la lista de nodos.
+     * @param name
+     * @return 
+     */
+    public Nodo SelecionarParada(String name){
+        for (int x = 0; x < nodos.count(); x++) {
+            Nodo n = (Nodo) nodos.get(x);
+            String nombreNodo = n.getInfo().getName();
+            if (nombreNodo.equalsIgnoreCase(name)) {
+                return n;
+            }
+        }
+        return null; 
+    }
+    
+    
+
+    /**
+     * Función para obtener el valor del atributo t. Es el límite de búsqueda
+     *
+     * @return Devuelve el valor de t
+     */
+    public int getT() {
+        return t;
     }
 
+    /**
+     * Proceso para cambiar el valor del atributo t
+     *
+     * @param t Valor nuevo de T
+     */
+    public void setT(int t) {
+        this.t = t;
+    }
+
+    /**
+     * @return the nodos
+     */
+    public Lista getNodos() {
+        return nodos;
+    }
 
 }
