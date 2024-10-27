@@ -53,7 +53,6 @@ public class MenuControles extends javax.swing.JFrame {
         CoberturaLabel = new javax.swing.JLabel();
         DFSButton = new javax.swing.JButton();
         BFSButton = new javax.swing.JButton();
-        LineaButton = new javax.swing.JButton();
         CoberturaField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         ResultadosBusquedaArea = new javax.swing.JTextArea();
@@ -69,6 +68,7 @@ public class MenuControles extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menú de Controles");
         setBackground(new java.awt.Color(255, 153, 153));
+        setForeground(java.awt.Color.darkGray);
         setResizable(false);
 
         JSONButton.setBackground(new java.awt.Color(255, 204, 204));
@@ -82,6 +82,9 @@ public class MenuControles extends javax.swing.JFrame {
             }
         });
 
+        tButton.setBackground(new java.awt.Color(0, 153, 153));
+        tButton.setFont(new java.awt.Font("Swis721 Blk BT", 0, 12)); // NOI18N
+        tButton.setForeground(new java.awt.Color(255, 255, 255));
         tButton.setText("Cambiar");
         tButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,7 +98,8 @@ public class MenuControles extends javax.swing.JFrame {
             }
         });
 
-        tLabel.setText("Establecer T");
+        tLabel.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        tLabel.setText("  Establecer T  ");
 
         MenuLabel.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         MenuLabel.setForeground(new java.awt.Color(0, 153, 153));
@@ -110,8 +114,12 @@ public class MenuControles extends javax.swing.JFrame {
             }
         });
 
+        SucursalLabel.setFont(new java.awt.Font("Segoe UI Semilight", 2, 12)); // NOI18N
         SucursalLabel.setText("Colocar o eliminar sucursal por nombre");
 
+        SucursalButton.setBackground(new java.awt.Color(0, 153, 153));
+        SucursalButton.setFont(new java.awt.Font("Swis721 Blk BT", 0, 12)); // NOI18N
+        SucursalButton.setForeground(new java.awt.Color(255, 255, 255));
         SucursalButton.setText("Cambiar");
         SucursalButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,8 +127,12 @@ public class MenuControles extends javax.swing.JFrame {
             }
         });
 
+        CoberturaLabel.setFont(new java.awt.Font("Segoe UI Semilight", 2, 12)); // NOI18N
         CoberturaLabel.setText("Seleccionar sucursal para búsqueda");
 
+        DFSButton.setBackground(new java.awt.Color(0, 153, 153));
+        DFSButton.setFont(new java.awt.Font("Swis721 Blk BT", 0, 12)); // NOI18N
+        DFSButton.setForeground(new java.awt.Color(255, 255, 255));
         DFSButton.setText("DFS");
         DFSButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,6 +140,9 @@ public class MenuControles extends javax.swing.JFrame {
             }
         });
 
+        BFSButton.setBackground(new java.awt.Color(0, 153, 153));
+        BFSButton.setFont(new java.awt.Font("Swis721 Blk BT", 0, 12)); // NOI18N
+        BFSButton.setForeground(new java.awt.Color(255, 255, 255));
         BFSButton.setText("BFS");
         BFSButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,13 +150,11 @@ public class MenuControles extends javax.swing.JFrame {
             }
         });
 
-        LineaButton.setText("Agregar");
-
         ResultadosBusquedaArea.setColumns(20);
         ResultadosBusquedaArea.setRows(5);
         jScrollPane1.setViewportView(ResultadosBusquedaArea);
 
-        ResultadosBusquedaLabel.setText("Resultados de la búsqueda");
+        ResultadosBusquedaLabel.setText("Resultados de la búsqueda ");
 
         CoberturaArea.setColumns(20);
         CoberturaArea.setRows(5);
@@ -176,111 +189,110 @@ public class MenuControles extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(73, 73, 73)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(JSONButton1)
+                            .addComponent(agregarLineaParadas)
+                            .addComponent(JSONButton))
+                        .addGap(223, 223, 223)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(CoberturaField, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(DFSButton)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(BFSButton))
+                                .addComponent(CoberturaLabel, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(tField, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(tButton))
+                                    .addComponent(tLabel))
+                                .addGap(286, 286, 286)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(SucursalLabel)
+                                        .addGap(30, 30, 30))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(SucursalField, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(SucursalButton))))
+                            .addComponent(CoverturaLabel))
+                        .addGap(64, 64, 64))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(274, 274, 274)
+                .addComponent(MenuLabel)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(ResultadosBusquedaLabel)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(78, 78, 78))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addGap(385, 385, 385)
-                                        .addComponent(tLabel)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(SucursalLabel)
-                                        .addGap(30, 30, 30))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(CoverturaLabel)
-                                        .addGap(3, 3, 3))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(348, 348, 348)
-                                        .addComponent(tField, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(tButton)
-                                        .addGap(55, 55, 55)
-                                        .addComponent(SucursalField, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(SucursalButton)))
-                                .addGap(46, 46, 46))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(JSONButton1)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(agregarLineaParadas)
-                                        .addGap(34, 34, 34)
-                                        .addComponent(LineaButton)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(24, 24, 24)
-                                        .addComponent(CoberturaField, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(DFSButton)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(BFSButton))
-                                        .addComponent(CoberturaLabel, javax.swing.GroupLayout.Alignment.LEADING)))
-                                .addGap(152, 152, 152))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(JSONButton)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(267, 267, 267)
-                                        .addComponent(MenuLabel))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(37, 37, 37)
-                                        .addComponent(ResultadosBusquedaLabel)))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                        .addGap(89, 89, 89))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(MenuLabel)
-                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(JSONButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(JSONButton1)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(agregarLineaParadas)
-                            .addComponent(LineaButton)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(CoberturaLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(CoberturaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
+                        .addGap(38, 38, 38)
+                        .addComponent(MenuLabel)
+                        .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(DFSButton, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(BFSButton, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addGap(62, 62, 62)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tLabel)
-                    .addComponent(SucursalLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tButton)
-                    .addComponent(SucursalField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SucursalButton))
-                .addGap(79, 79, 79)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ResultadosBusquedaLabel)
-                    .addComponent(CoverturaLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2))
-                .addGap(16, 16, 16))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(JSONButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(JSONButton1)
+                                .addGap(18, 18, 18)
+                                .addComponent(agregarLineaParadas))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(CoberturaLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(CoberturaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(DFSButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(BFSButton, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addGap(49, 49, 49)
+                        .addComponent(SucursalLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(SucursalField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SucursalButton)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(94, 94, 94)
+                        .addComponent(tLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tButton))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(ResultadosBusquedaLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(CoverturaLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2)))
+                .addGap(51, 51, 51))
         );
 
         pack();
@@ -494,7 +506,6 @@ public class MenuControles extends javax.swing.JFrame {
     private javax.swing.JButton DFSButton;
     private javax.swing.JButton JSONButton;
     private javax.swing.JButton JSONButton1;
-    private javax.swing.JButton LineaButton;
     private javax.swing.JLabel MenuLabel;
     private javax.swing.JTextArea ResultadosBusquedaArea;
     private javax.swing.JLabel ResultadosBusquedaLabel;

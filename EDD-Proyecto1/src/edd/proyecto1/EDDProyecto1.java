@@ -17,6 +17,7 @@ public class EDDProyecto1 {
     public static void main(String[] args){
         // inicialización de la interfaz menú
         MenuControles menuinicial= new MenuControles();
+        menuinicial.setLocationRelativeTo(null);
         menuinicial.show();
     }
 }
