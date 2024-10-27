@@ -4,7 +4,6 @@
  */
 package edd.Interfaz;
 import EstructurasDeDatos.Grafo;
-import EstructurasDeDatos.Lista;
 import EstructurasDeDatos.Nodo;
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -22,14 +21,6 @@ import java.util.Set;
 public class GraphStream extends JFrame implements ViewerListener {
     private Graph graphstream;
     private Grafo grafo;
-
-    public Grafo getGrafo() {
-        return grafo;
-    }
-
-    public void setGrafo(Grafo grafo) {
-        this.grafo = grafo;
-    }
     private boolean loop = true;
 
     public GraphStream(Grafo grafo) {
@@ -41,7 +32,7 @@ public class GraphStream extends JFrame implements ViewerListener {
 
     // Método para inicializar el grafo
     private void initGraph() {
-        graphstream = new SingleGraph("Tutorial 1");
+        setGraphstream(new SingleGraph("Tutorial 1"));
         Set<String> nombresUnicos = new HashSet<>();
         Set<String> aristasUnicas = new HashSet<>();
 
@@ -52,7 +43,7 @@ public class GraphStream extends JFrame implements ViewerListener {
     
         // Agregar nodo solo si su nombre no está en nombresUnicos
         if (!nombresUnicos.contains(nombreNodo)) {
-            graphstream.addNode(nombreNodo);
+                getGraphstream().addNode(nombreNodo);
             nombresUnicos.add(nombreNodo);
             }   
         }
@@ -73,25 +64,25 @@ public class GraphStream extends JFrame implements ViewerListener {
 
             // Verificar si la arista ya fue añadida
             if (!aristasUnicas.contains(idArista)) {
-                graphstream.addEdge(idArista, nombreNodo, nombrePadre, true);  // Último parámetro para arista no orientada
+                    getGraphstream().addEdge(idArista, nombreNodo, nombrePadre, false);  // Último parámetro para arista no orientada
                     aristasUnicas.add(idArista);
                 }
             }
         }
 
         // Añadir etiquetas para mejor visibilidad
-        for (Node node : graphstream) {
+        for (Node node : getGraphstream()) {
             node.setAttribute("ui.label", node.getId());
         }
 
         // Estilo predeterminado para los nodos
-        graphstream.setAttribute("ui.stylesheet", "node { fill-color: grey; }");
+        getGraphstream().setAttribute("ui.stylesheet", "node { fill-color: grey; }");
     }
 
     // Método para iniciar el bucle del visualizador
     private void run() {
         // Crear un visualizador para el grafo
-        var viewer = new SwingViewer(graphstream, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
+        var viewer = new SwingViewer(getGraphstream(), Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
         viewer.enableAutoLayout();
 
         // Añadir el panel del visualizador a jPanel1
@@ -118,24 +109,6 @@ public class GraphStream extends JFrame implements ViewerListener {
 
     @Override
     public void mouseLeft(String id) {}
-
-    // Método para alternar el color del nodo clicado entre gris y rojo
-    private void toggleNodeColor(String nodeName) {
-        Node node = graphstream.getNode(nodeName);
-        if (node != null) {
-            String currentStyle = String.valueOf(node.getAttribute("ui.style"));
-            if (currentStyle.contains("red")) {
-                node.setAttribute("ui.style", "fill-color: grey;");
-                System.out.println("Node " + nodeName + " color changed to grey.");
-            } else {
-                node.setAttribute("ui.style", "fill-color: red;");
-                System.out.println("Node " + nodeName + " color changed to red.");
-            }
-        } else {
-            System.out.println("Node " + nodeName + " does not exist.");
-        }
-    }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -193,12 +166,40 @@ public class GraphStream extends JFrame implements ViewerListener {
         }
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new GraphStream(grafo).setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new GraphStream(getGrafo()).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel GraphStreamPanel;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the graphstream
+     */
+    public Graph getGraphstream() {
+        return graphstream;
+    }
+
+    /**
+     * @param graphstream the graphstream to set
+     */
+    public void setGraphstream(Graph graphstream) {
+        this.graphstream = graphstream;
+    }
+
+    /**
+     * @return the grafo
+     */
+    public Grafo getGrafo() {
+        return grafo;
+    }
+
+    /**
+     * @param grafo the grafo to set
+     */
+    public void setGrafo(Grafo grafo) {
+        this.grafo = grafo;
+    }
 
 
 }

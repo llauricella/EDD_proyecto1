@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class LecturaJson {
     public Grafo grafo;
-
+    private int t;
     /**
      * @return 
      * @throws java.io.IOException
@@ -28,14 +28,13 @@ public class LecturaJson {
         chooser.showOpenDialog(null);
         var file = chooser.getSelectedFile();
         Lista listaPrimeros = new Lista();
-        int t = 0;
+        setT(0);
         if ("Caracas.json".equals(file.getName())) {
-            t = 3;
+            setT(3);
         } else if ("Bogota.json".equals(file.getName())) {
-            t = 10;
+            setT(10);
         }
-        grafo = new Grafo(t);
-
+        grafo = new Grafo(getT());
         try {
             if (file != null) {
 
@@ -143,9 +142,39 @@ public class LecturaJson {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERROR, No es un tipo de dato válido", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        grafo.printGrafo();
         return grafo;
 
     }
 
-}
+    /**
+     * Funcion encargada de devolver el T
+     * del grafo
+     * @return T actual del grafo
+     */
+    
+    public int getT() {
+        return t;
+    }
+
+    /**
+     * Funcion encargada de establecer el T
+     * del grafo
+     * @return Nuevo T del grafo
+     */
+    public void setT(int t) {
+        this.t = t;
+    }
+        
+    /** 
+     * Procedimiento encargada de enlazar una secuencia de paradas
+     * @param nuevaLinea es una secuencia de paradas introducida por el
+     * usuario
+     */
+    public void agregarLinea (Lista nuevaLinea){
+        for (int i = 1; i <= nuevaLinea.count(); i++){
+            Parada x = (Parada) nuevaLinea.get(i-1);
+            Parada y = (Parada) nuevaLinea.get(i);
+            grafo.addEdge(x,y);
+            }
+        }
+        }

@@ -107,8 +107,8 @@ public class Grafo {
     public Nodo SelecionarParada(String name){
         for (int x = 0; x < nodos.count(); x++) {
             Nodo n = (Nodo) nodos.get(x);
-            if (n.getInfo().getName().equals(name)) {
-                System.out.print("La sucursal seleccionada es: " + name);
+            String nombreNodo = n.getInfo().getName();
+            if (nombreNodo.equalsIgnoreCase(name)) {
                 return n;
             }
         }
