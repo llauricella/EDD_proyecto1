@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package EstructurasDeDatos;
-   
+
 /**
  * En esta clase se almacenan todos lo métodos de busca a ejecutar.
  *
@@ -21,6 +21,7 @@ public class Busquedas {
      * dentro del rango de búsqueda.
      */
     public static Lista BFS(Nodo root, int heightLimit) {
+        // Breadth-First Search from parent to children
         return getAllNodesByHeight(visitAllNodesBFS(root), heightLimit);
     }
 
@@ -33,34 +34,21 @@ public class Busquedas {
      * dentro del rango de búsqueda.
      */
     public static Lista DFS(Nodo root, int heightLimit) {
+        // Depth-First Search from parent to children
         return getAllNodesByHeight(visitAllNodesDFS(root), heightLimit);
     }
 
     /**
-     * Función para buscar paradas sin sucursal utilizando busqueda por amplitud según un límite determinado.
+     * *
      *
-     * @param grafo Grafo con las paradas a visitar
+     *
+     * @param root
      * @param heightLimit
      * @return
      */
-    public static Lista BFSSucursal(Grafo grafo, int heightLimit) {
-
-        Nodo buscar = (Nodo) grafo.getNodos().get(0);
-        Lista encontrados;
-
-        for (int i = 1; i < grafo.getNodos().count(); i++) {
-            if (buscar.getInfo().isSucursal() == true) {
-                if (grafo.getNodos().get(i + 1) != null) {
-                    buscar = (Nodo) grafo.getNodos().get(i + 1);
-                }
-            } else {
-                break;
-            }
-        }
-
-        encontrados = getAllNodesByHeight(visitAllNodesBFSSucursal(buscar), heightLimit);
-
-        return encontrados;
+    public static Lista BFSSucursal(Nodo root, int heightLimit) {
+        // Depth-First Search from parent to children
+        return getAllNodesByHeight(visitAllNodesBFSSucursal(root), heightLimit);
     }
 
     /**
@@ -105,8 +93,8 @@ public class Busquedas {
 
     /**
      * Función que visita todos los nodos dentro del grafo utilizando la
-     * búsqueda por amplitud. Su finalidad es encontrar todos los nodos que no
-     * posean una sucursal.
+     * búsqueda por amplitud. Su finalidad es encontrar todos los nodos que
+     * no posean una sucursal.
      *
      * @param root Nodo donde se iniciará el recorrido.
      * @return Una lista con todos los nodos visitados sin sucursal.
@@ -199,10 +187,10 @@ public class Busquedas {
             Nodo nodo = (Nodo) grafo.get(n);
             if (!result.contains(nodo)) {
                 if (nodo.getHeight() <= heightLimit) {
-                    result.add(nodo);
+                result.add(nodo);
                 }
             }
-
+ 
         }
         return result;
     }

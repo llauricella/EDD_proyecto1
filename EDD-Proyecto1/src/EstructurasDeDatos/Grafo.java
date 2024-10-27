@@ -100,7 +100,7 @@ public class Grafo {
     }
     
     /**
-     * Procedimiento para imprimir los elementos de la lista de nodos.
+     * Función para imprimir los elementos de la lista de nodos.
      * @param name
      * @return 
      */
@@ -114,6 +114,7 @@ public class Grafo {
         }
         return null; 
     }
+    
     
 
     /**
