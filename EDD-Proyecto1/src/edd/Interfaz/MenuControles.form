@@ -62,7 +62,7 @@
                                       <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace min="-2" pref="339" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="348" max="-2" attributes="0"/>
                                       <Component id="tField" min="-2" pref="54" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="tButton" min="-2" max="-2" attributes="0"/>
@@ -219,9 +219,6 @@
     </Component>
     <Component class="javax.swing.JLabel" name="MenuLabel">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="7a" green="e4" red="ca" type="rgb"/>
-        </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Century Gothic" size="24" style="0"/>
         </Property>

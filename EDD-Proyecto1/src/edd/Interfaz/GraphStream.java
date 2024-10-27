@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package edd.Interfaz;
+
 import EstructurasDeDatos.Grafo;
 import EstructurasDeDatos.Nodo;
 import java.awt.BorderLayout;
@@ -14,11 +15,13 @@ import org.graphstream.ui.view.*;
 import org.graphstream.ui.swing_viewer.SwingViewer;
 import java.util.HashSet;
 import java.util.Set;
+
 /**
  * @version 23/10/2024
  * @author Luigi Lauricella
  */
 public class GraphStream extends JFrame implements ViewerListener {
+
     private Graph graphstream;
     private Grafo grafo;
     private boolean loop = true;
@@ -40,12 +43,12 @@ public class GraphStream extends JFrame implements ViewerListener {
         for (int i = 0; i < getGrafo().getNodos().count(); i++) {
             Nodo aux = (Nodo) getGrafo().getNodos().get(i);
             String nombreNodo = aux.getInfo().getName();
-    
-        // Agregar nodo solo si su nombre no está en nombresUnicos
-        if (!nombresUnicos.contains(nombreNodo)) {
+
+            // Agregar nodo solo si su nombre no está en nombresUnicos
+            if (!nombresUnicos.contains(nombreNodo)) {
                 getGraphstream().addNode(nombreNodo);
-            nombresUnicos.add(nombreNodo);
-            }   
+                nombresUnicos.add(nombreNodo);
+            }
         }
 
         // Después, agregar todas las aristas únicas
@@ -55,15 +58,15 @@ public class GraphStream extends JFrame implements ViewerListener {
 
             // Agregar arista si el nodo tiene padre y la arista no está en aristasUnicas
             if (aux.getParent() != null) {
-            String nombrePadre = aux.getParent().getInfo().getName();
-        
-            // Crear un identificador único sin importar la dirección
-            String idArista = nombreNodo.compareTo(nombrePadre) < 0
-                          ? nombreNodo + ":" + nombrePadre
-                          : nombrePadre + ":" + nombreNodo;
+                String nombrePadre = aux.getParent().getInfo().getName();
 
-            // Verificar si la arista ya fue añadida
-            if (!aristasUnicas.contains(idArista)) {
+                // Crear un identificador único sin importar la dirección
+                String idArista = nombreNodo.compareTo(nombrePadre) < 0
+                        ? nombreNodo + ":" + nombrePadre
+                        : nombrePadre + ":" + nombreNodo;
+
+                // Verificar si la arista ya fue añadida
+                if (!aristasUnicas.contains(idArista)) {
                     getGraphstream().addEdge(idArista, nombreNodo, nombrePadre, false);  // Último parámetro para arista no orientada
                     aristasUnicas.add(idArista);
                 }
@@ -88,7 +91,7 @@ public class GraphStream extends JFrame implements ViewerListener {
         // Añadir el panel del visualizador a jPanel1
         View view = viewer.addDefaultView(false); // Sin vista por defecto
         GraphStreamPanel.setLayout(new BorderLayout());
-        GraphStreamPanel.add((Component)view, BorderLayout.CENTER); // Añadir view al jPanel1
+        GraphStreamPanel.add((Component) view, BorderLayout.CENTER); // Añadir view al jPanel1
 
         setVisible(true); // Hacer visible el JFrame
     }
@@ -99,16 +102,20 @@ public class GraphStream extends JFrame implements ViewerListener {
     }
 
     @Override
-    public void buttonPushed(String id) {}
+    public void buttonPushed(String id) {
+    }
 
     @Override
-    public void buttonReleased(String id) {}
-    
-    @Override
-    public void mouseOver(String id) {}
+    public void buttonReleased(String id) {
+    }
 
     @Override
-    public void mouseLeft(String id) {}
+    public void mouseOver(String id) {
+    }
+
+    @Override
+    public void mouseLeft(String id) {
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -200,6 +207,5 @@ public class GraphStream extends JFrame implements ViewerListener {
     public void setGrafo(Grafo grafo) {
         this.grafo = grafo;
     }
-
 
 }

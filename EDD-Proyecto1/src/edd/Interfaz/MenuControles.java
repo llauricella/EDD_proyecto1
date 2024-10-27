@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
  *
  * @author Luigi Lauricella
  */
+
 public class MenuControles extends javax.swing.JFrame {
 
     public GraphStream graphstream;
@@ -96,7 +97,6 @@ public class MenuControles extends javax.swing.JFrame {
 
         tLabel.setText("Establecer T");
 
-        MenuLabel.setBackground(new java.awt.Color(202, 228, 122));
         MenuLabel.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         MenuLabel.setForeground(new java.awt.Color(0, 153, 153));
         MenuLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -199,7 +199,7 @@ public class MenuControles extends javax.swing.JFrame {
                                         .addComponent(CoverturaLabel)
                                         .addGap(3, 3, 3))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(339, 339, 339)
+                                        .addGap(348, 348, 348)
                                         .addComponent(tField, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(tButton)
@@ -431,24 +431,22 @@ public class MenuControles extends javax.swing.JFrame {
     }//GEN-LAST:event_JSONButton1ActionPerformed
 
     private void agregarLineaParadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarLineaParadasActionPerformed
-        
+
         int cant = JOptionPane.showInputDialog("");
-        
-}  
-                
-    /** 
+
+    }
+
+    /**
      * Procedimiento encargado de enlazar una secuencia de paradas
-     * 
-     * @param nuevaLinea es una secuencia de paradas introducida por el
-     * usuario
+     *
+     * @param nuevaLinea es una secuencia de paradas introducida por el usuario
      */
-    public void agregarLinea (Lista nuevaLinea){
-        for (int i = 1; i <= nuevaLinea.count(); i++){
-            Parada x = (Parada) nuevaLinea.get(i-1);
+    public void agregarLinea(Lista nuevaLinea) {
+        for (int i = 1; i <= nuevaLinea.count(); i++) {
+            Parada x = (Parada) nuevaLinea.get(i - 1);
             Parada y = (Parada) nuevaLinea.get(i);
-            grafo.addEdge(x,y);
+            grafo.addEdge(x, y);
             graphstream.addEdge(x.getName(), y.getName());
-            }
         }
     }//GEN-LAST:event_agregarLineaParadasActionPerformed
 
@@ -456,36 +454,36 @@ public class MenuControles extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+    /* Set the Nimbus look and feel */
+    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+     */
+    try {
+        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            if ("Nimbus".equals(info.getName())) {
+                javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                break;
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuControles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuControles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuControles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuControles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MenuControles().setVisible(true);
-            }
-        });
+    } catch (ClassNotFoundException ex) {
+        java.util.logging.Logger.getLogger(MenuControles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (InstantiationException ex) {
+        java.util.logging.Logger.getLogger(MenuControles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (IllegalAccessException ex) {
+        java.util.logging.Logger.getLogger(MenuControles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        java.util.logging.Logger.getLogger(MenuControles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
     }
+    //</editor-fold>
+
+    /* Create and display the form */
+    java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+            new MenuControles().setVisible(true);
+        }
+    });
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BFSButton;
