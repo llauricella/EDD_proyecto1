@@ -13,14 +13,20 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author santi
+ * @version 27/10/2024
+ * @author Santiago Castro
  */
 public class LecturaJson {
     public Grafo grafo;
     private int t;
+    
     /**
-     * @return 
+     * Funcion encargada de la carga del archivo Json.
+     * El usuario elije un archivo Json para cargar y la
+     * funcion lee todo el archivo para convertirlo en 
+     * un objeto de tipo grafo
+     * 
+     * @return Grafo guardado con los datos del archivo Json
      * @throws java.io.IOException
      */
     public Grafo LecturaJson() throws IOException {

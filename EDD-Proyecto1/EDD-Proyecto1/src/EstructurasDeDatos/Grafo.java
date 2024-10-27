@@ -8,7 +8,7 @@ package EstructurasDeDatos;
  * Esta clase define un objeto grafo que contenga una lista de paradas y un
  * entero para indicar el rango de búsqueda actual
  *
- * @version 24/10/2024
+ * @version 27/10/2024
  * @author Michelle García
  */
 public class Grafo {
@@ -100,7 +100,7 @@ public class Grafo {
     }
     
     /**
-     * Procedimiento para imprimir los elementos de la lista de nodos.
+     * Función para imprimir los elementos de la lista de nodos.
      * @param name
      * @return 
      */
@@ -114,6 +114,7 @@ public class Grafo {
         }
         return null; 
     }
+    
     
 
     /**

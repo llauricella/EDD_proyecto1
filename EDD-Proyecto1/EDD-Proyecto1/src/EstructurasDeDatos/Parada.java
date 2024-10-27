@@ -8,7 +8,7 @@ package EstructurasDeDatos;
  * Esta clase define un objeto de tipo Parada. Contiene el nombre de la parada y
  * un booleano que indica si tiene o no tiene una sucursal dentro de su rango.
  *
- * @version 13/10/2024
+ * @version 27/10/2024
  * @author Michelle García
  */
 public class Parada {

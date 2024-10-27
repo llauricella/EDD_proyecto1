@@ -9,7 +9,7 @@ package EstructurasDeDatos;
  * cantidad de elementos, una lista donde se almacenan los objetos siguienres y
  * un elemento de tipo ElementoLista.
  *
- * @version 24/10/2024
+ * @version 27/10/2024
  * @author Michelle García
  */
 public class Lista {
@@ -71,7 +71,7 @@ public class Lista {
     public void remove(int index) {
         if (index >= 0 && index < count) {
             if (index == 0) {
-                // Si el elemento a eliminar es el primero de la lista
+
                 if (this.next == null) {
                     this.value = null;
                 } else {
@@ -84,11 +84,11 @@ public class Lista {
                     actual = actual.next;
                 }
 
-                // Elimina el elemento de la lista
+
                 actual.next = actual.next.next;
             }
 
-            // Actualiza los indices del siguiente elemento
+
             Lista temp = this;
             int indiceActual = 0;
             while (temp != null) {
@@ -147,7 +147,6 @@ public class Lista {
         for (int i = 0; i < count(); i++) {
             if ((Nodo)get(i)!= null) {
                 txt = txt + "\n"+ ((Nodo)get(i)).getInfo().getName();
-                System.out.print("\n"+ ((Nodo)get(i)).getInfo().getName());
             }
         }
         return txt;

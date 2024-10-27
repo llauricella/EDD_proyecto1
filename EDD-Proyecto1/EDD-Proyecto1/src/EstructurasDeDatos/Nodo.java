@@ -9,7 +9,7 @@ package EstructurasDeDatos;
  * almacenan los hijos del nodo, un Nodo donde se almacena el padre y un objeto
  * de tipo Parada referente a la información que contiene el nodo.
  *
- * @version 24/10/2024
+ * @version 27/10/2024
  * @author Michelle García
  *
  */

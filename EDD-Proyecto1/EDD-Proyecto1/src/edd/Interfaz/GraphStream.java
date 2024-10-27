@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package edd.Interfaz;
+
 import EstructurasDeDatos.Grafo;
 import EstructurasDeDatos.Lista;
 import EstructurasDeDatos.Nodo;
@@ -14,13 +15,13 @@ import org.graphstream.graph.*;
 import org.graphstream.graph.implementations.*;
 import org.graphstream.ui.view.*;
 import org.graphstream.ui.swing_viewer.SwingViewer;
-import java.util.HashSet;
-import java.util.Set;
+
 /**
- * @version 23/10/2024
+ * @version 27/10/2024
  * @author Luigi Lauricella
  */
 public class GraphStream extends JFrame implements ViewerListener {
+
     private Graph graphstream;
     private Grafo grafo;
     private boolean loop = true;
@@ -28,71 +29,78 @@ public class GraphStream extends JFrame implements ViewerListener {
     public GraphStream(Grafo grafo) {
         this.grafo = grafo;
         initComponents();
-        initGraph(); // Inicializa el grafo
-        run(); // Inicia el visualizador
+        initGraph();
+        run();
     }
 
-    // Método para inicializar el grafo
     private void initGraph() {
         setGraphstream(new SingleGraph("Tutorial 1"));
-        Set<String> nombresUnicos = new HashSet<>();
-        Set<String> aristasUnicas = new HashSet<>();
+        String[] nombresUnicos = new String[getGrafo().getNodos().count()];
+        int nombreIndex = 0;
 
-        // Primero, agregar todos los nodos únicos
+        String[] aristasUnicas = new String[getGrafo().getNodos().count() * getGrafo().getNodos().count()];
+        int aristaIndex = 0;
+
         for (int i = 0; i < getGrafo().getNodos().count(); i++) {
             Nodo aux = (Nodo) getGrafo().getNodos().get(i);
             String nombreNodo = aux.getInfo().getName();
-    
-        // Agregar nodo solo si su nombre no está en nombresUnicos
-        if (!nombresUnicos.contains(nombreNodo)) {
+
+            boolean nodoExistente = false;
+            for (int j = 0; j < nombreIndex; j++) {
+                if (nombresUnicos[j].equals(nombreNodo)) {
+                    nodoExistente = true;
+                    break;
+                }
+            }
+
+            if (!nodoExistente) {
                 getGraphstream().addNode(nombreNodo);
-            nombresUnicos.add(nombreNodo);
-            }   
+                nombresUnicos[nombreIndex++] = nombreNodo;
+            }
         }
 
-        // Después, agregar todas las aristas únicas
         for (int i = 0; i < getGrafo().getNodos().count(); i++) {
             Nodo aux = (Nodo) getGrafo().getNodos().get(i);
             String nombreNodo = aux.getInfo().getName();
 
-            // Agregar arista si el nodo tiene padre y la arista no está en aristasUnicas
             if (aux.getParent() != null) {
-            String nombrePadre = aux.getParent().getInfo().getName();
-        
-            // Crear un identificador único sin importar la dirección
-            String idArista = nombreNodo.compareTo(nombrePadre) < 0
-                          ? nombreNodo + ":" + nombrePadre
-                          : nombrePadre + ":" + nombreNodo;
+                String nombrePadre = aux.getParent().getInfo().getName();
 
-            // Verificar si la arista ya fue añadida
-            if (!aristasUnicas.contains(idArista)) {
-                    getGraphstream().addEdge(idArista, nombreNodo, nombrePadre, false);  // Último parámetro para arista no orientada
-                    aristasUnicas.add(idArista);
+                String idArista = nombreNodo.compareTo(nombrePadre) < 0
+                        ? nombreNodo + ":" + nombrePadre
+                        : nombrePadre + ":" + nombreNodo;
+
+                boolean aristaExistente = false;
+                for (int j = 0; j < aristaIndex; j++) {
+                    if (aristasUnicas[j].equals(idArista)) {
+                        aristaExistente = true;
+                        break;
+                    }
+                }
+
+                if (!aristaExistente) {
+                    getGraphstream().addEdge(idArista, nombreNodo, nombrePadre, false);
+                    aristasUnicas[aristaIndex++] = idArista;
                 }
             }
         }
 
-        // Añadir etiquetas para mejor visibilidad
         for (Node node : getGraphstream()) {
             node.setAttribute("ui.label", node.getId());
         }
 
-        // Estilo predeterminado para los nodos
         getGraphstream().setAttribute("ui.stylesheet", "node { fill-color: grey; }");
     }
 
-    // Método para iniciar el bucle del visualizador
     private void run() {
-        // Crear un visualizador para el grafo
         var viewer = new SwingViewer(getGraphstream(), Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
         viewer.enableAutoLayout();
 
-        // Añadir el panel del visualizador a jPanel1
-        View view = viewer.addDefaultView(false); // Sin vista por defecto
+        View view = viewer.addDefaultView(false);
         GraphStreamPanel.setLayout(new BorderLayout());
-        GraphStreamPanel.add((Component)view, BorderLayout.CENTER); // Añadir view al jPanel1
+        GraphStreamPanel.add((Component) view, BorderLayout.CENTER);
 
-        setVisible(true); // Hacer visible el JFrame
+        setVisible(true);
     }
 
     @Override
@@ -101,16 +109,20 @@ public class GraphStream extends JFrame implements ViewerListener {
     }
 
     @Override
-    public void buttonPushed(String id) {}
+    public void buttonPushed(String id) {
+    }
 
     @Override
-    public void buttonReleased(String id) {}
-    
-    @Override
-    public void mouseOver(String id) {}
+    public void buttonReleased(String id) {
+    }
 
     @Override
-    public void mouseLeft(String id) {}
+    public void mouseOver(String id) {
+    }
+
+    @Override
+    public void mouseLeft(String id) {
+    }
     
     /** 
      * Procedimiento encargado de enlazar una secuencia de paradas
@@ -121,12 +133,12 @@ public class GraphStream extends JFrame implements ViewerListener {
     public void agregarLinea (Lista nuevaLinea){
         for (int i = 1; i <= nuevaLinea.count(); i++){
             Nodo n = (Nodo)nuevaLinea.get(i);
-            if (grafo.SelecionarParada(n.getInfo().getName())== null) {
+            Parada x = (Parada) nuevaLinea.get(i-1);
+            Parada y = (Parada) nuevaLinea.get(i);
+            if (!grafo.getNodos().contains(y)) {
                 grafo.addNode((Parada) nuevaLinea.get(i));
                 graphstream.addNode((String)nuevaLinea.get(i));
             }
-            Parada x = (Parada) nuevaLinea.get(i-1);
-            Parada y = (Parada) nuevaLinea.get(i);
             grafo.addEdge(x,y);
             graphstream.addEdge(x.getName() + ":" + y.getName(), x.getName(), y.getName());
         }
@@ -222,6 +234,5 @@ public class GraphStream extends JFrame implements ViewerListener {
     public void setGrafo(Grafo grafo) {
         this.grafo = grafo;
     }
-
 
 }

@@ -7,7 +7,7 @@ package EstructurasDeDatos;
 /**
  * Esta clase define un objeto de tipo cola. Contiene una lista de los elementos encolados.
  * 
- * @version 24/10/2024
+ * @version 27/10/2024
  * @author Michelle García
  */
 public class Cola {

@@ -3,21 +3,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package edd.proyecto1;
-import edd.Interfaz.MenuControles;
-
+import EstructurasDeDatos.Grafo;
+import EstructurasDeDatos.Lista;
+import EstructurasDeDatos.Nodo;
+import EstructurasDeDatos.Parada;
+import edd.Interfaz.Menu;
 /**
- * @version 23/10/2024
- * @author Luigi Lauricella
+ *
+ * @author lalau
  */
 public class EDDProyecto1 {
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args){
-        // inicialización de la interfaz menú
-        MenuControles menuinicial= new MenuControles();
-        menuinicial.setLocationRelativeTo(null);
+    public static void main(String[] args) {
+        Menu menuinicial= new Menu();
         menuinicial.show();
     }
+    
 }
