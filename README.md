@@ -7,7 +7,7 @@ _Programa para determinar la mejor ubicación de sucursales para una cadena de s
 ### Contenido de _Issues_
 * Librerías.zip
 > Antes de inicializar el proyecto es necesario agregar 3 librerías. Estas se encuentran en el zip "Librerías". Para añadirlas a Netbeans debe utilizar la opción Add JAR/Folder.
-* Clases.pdf
+* Clases.png
 > Diagrama de clases del proyecto
 * Archivos de entrada
 > Caracas.json y Bogotá.json. Son los casos descritos del programa
