@@ -11,3 +11,5 @@ _Programa para determinar la mejor ubicación de sucursales para una cadena de s
 > Diagrama de clases del proyecto
 * Archivos de entrada
 > Caracas.json y Bogotá.json. Son los casos descritos del programa
+* Leyenda del grafo
+> Significado de los colores presentes en el grafo
